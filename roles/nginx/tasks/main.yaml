@@ -2,3 +2,9 @@
   ansible.builtin.apt: 
     name: nginx
     state: present
+
+- name: Copy conf for nginx
+  ansible.builtin.copy:
+    dest: /etc/nginx/sites-enabled/default
+    src: ../files/default
+  notify: Restart nginx

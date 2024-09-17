@@ -1,0 +1,4 @@
+- name: Restart Uwsgi
+  ansible.builtin.service:
+    name: uwsgi
+    state: restarted

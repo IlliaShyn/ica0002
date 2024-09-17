@@ -1,22 +1,23 @@
 #- name: Ansible ping module
 #  ansible.builtin.ping:
 
-- name: Create Roman/Juri users
-  ansible.builtin.user:
-    name: "{{ item }}"
-  loop:
-   - romankuchin
-   - hudolejev
 
+#- name: Create Roman/Juri users
+#  ansible.builtin.user:
+#    name: "{{ item }}"
+#  loop:
+#   - romankuchin
+#   - hudolejev
 
-- name: Add Roman's and Juri's public keys
-  ansible.posix.authorized_key:
-    user: "{{ item }}"
-    state: present
-    key: https://github.com/{{ item }}.keys
-  loop:
-   - romankuchin
-   - hudolejev
+#- name: Add Roman's and Juri's public keys
+#  ansible.posix.authorized_key:
+#    user: "{{ item }}"
+#    state: present
+#    key: https://github.com/{{ item }}.keys
+#  loop:
+#   - romankuchin
+#   - hudolejev
+
 
 - name: Update APT cache
   ansible.builtin.apt:
