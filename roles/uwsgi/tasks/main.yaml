@@ -6,9 +6,12 @@
     state: present
 
 - name: Copy uwsgi conf to destination file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     dest: /etc/uwsgi/apps-enabled/agama.ini
-    src: ../files/agama.ini
+    src: agama.ini.j2
+    owner: agama
+    mode: 0600
+  no_log: true
   notify: Restart Uwsgi
 
 - name: uWSGI service

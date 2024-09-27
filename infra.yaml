@@ -4,10 +4,14 @@
     roles:
       - init
   
+  - name: Database
+    hosts: db_servers
+    roles: 
+      - mysql
+
   - name: Nginx
     hosts: web_servers
     roles: 
       - agama
       - uwsgi
       - nginx
-      

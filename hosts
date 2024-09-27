@@ -1,4 +1,8 @@
 IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=7122 ansible_user=ubuntu
+IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=19822 ansible_user=ubuntu
+
+[db_servers]
+IlliaShyn-2
 
 [web_servers]
 IlliaShyn-1
