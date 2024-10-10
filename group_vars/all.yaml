@@ -1,4 +1,4 @@
-mysql_host: 192.168.43.184
+mysql_host: IlliaShyn-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -8,3 +8,10 @@ mysql_password: !vault |
           37303233323037383535363935626130353630323563373238363334643665366131363361383530
           3137316637393836360a393766626164356264613735353632356436363764393033313637383639
           6566
+startup_name: agamais.ttu
+localhost: 127.0.0.0/8
+localnet: 192.168.42.0/23
+dns_forwarders: 
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9

@@ -4,7 +4,7 @@
     state: present
 
 - name: Copy conf for nginx
-  ansible.builtin.copy:
+  ansible.builtin.template:
     dest: /etc/nginx/sites-enabled/default
-    src: ../files/default
+    src: default.j2
   notify: Restart nginx

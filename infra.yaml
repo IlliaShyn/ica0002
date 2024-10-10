@@ -4,6 +4,18 @@
     roles:
       - init
   
+  - name: DNS
+    hosts: dns_servers
+    roles: 
+      - bind
+
+  - name: Resolv
+    hosts: all
+    roles: 
+      - resolv
+    tags: 
+      - res
+  
   - name: Database
     hosts: db_servers
     roles: 

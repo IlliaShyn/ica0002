@@ -1,0 +1,26 @@
+- name: Intsall bind9
+  ansible.builtin.apt:
+    name: bind9
+    state: present
+
+- name: Bind is started
+  ansible.builtin.service:
+    name: bind9
+    state: started
+
+- name: Configure conf.options
+  ansible.builtin.template:
+    src: named.conf.{{ item }}.j2
+    dest: /etc/bind/named.conf.{{ item }}
+  with_items: 
+    - options
+    - local
+  notify: Restart bind
+
+- name: Configure zone
+  ansible.builtin.template:
+    src: zone.j2
+    dest: /var/cache/bind/db.agamais.ttu
+    mode: '0644'
+  notify: rndc reload bind9
+

@@ -1,0 +1,18 @@
+acl localnetwork { {{ localnet }}; {{ localhost }}; };
+options {
+	directory "/var/cache/bind";
+
+	 forwarders { {% for ip in dns_forwarders %}
+	 	     {{ ip }};
+     {% endfor %}
+	 };
+
+	 allow-query { localnetwork; };
+
+	dnssec-validation no;
+
+};
+
+statistics-channels {
+	inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};
