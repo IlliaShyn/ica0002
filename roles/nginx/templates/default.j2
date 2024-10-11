@@ -6,4 +6,10 @@ server {
 		uwsgi_pass localhost:5000;
 		include uwsgi_params;
 	}
+    {% if groups['prometheus'] %}
+
+	location /prometheus {
+	    proxy_pass http://IlliaShyn-1:9090;
+	}
+	{% endif %}
 }

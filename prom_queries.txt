@@ -1,0 +1,5 @@
+#memory consumption
+100 * (1 - (node_memory_MemAvailable_bytes{job="node"} / node_memory_MemTotal_bytes{job="node"})) by (instance)
+
+#CPU Load
+100 * (1 - avg by(instance) (rate(node_cpu_seconds_total{job="node", mode="idle"}[5m])))

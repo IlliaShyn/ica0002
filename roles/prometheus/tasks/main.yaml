@@ -1,0 +1,18 @@
+- name: Install prometheus
+  ansible.builtin.apt: 
+    name: prometheus
+    state: present
+
+- name: Conf for prometheus
+  ansible.builtin.template: 
+    src: prometheus.yml 
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644'
+  notify: Restart prometheus
+
+- name: Web template
+  ansible.builtin.template: 
+    src: metrics.j2 
+    dest: /etc/default/prometheus
+    mode: '0644'
+  notify: Restart prometheus 

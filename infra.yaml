@@ -15,6 +15,13 @@
       - resolv
     tags: 
       - res
+
+  - name: Prometheus
+    hosts: prometheus
+    roles:
+      - prometheus
+    tags: 
+      - prom
   
   - name: Database
     hosts: db_servers
