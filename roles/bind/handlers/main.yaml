@@ -3,6 +3,11 @@
     name: bind9
     state: restarted
 
+- name: Restart bind-exporter
+  ansible.builtin.service:
+    name: prometheus-bind-exporter
+    state: restarted
+
 - name: rndc reload bind9
   ansible.builtin.command: rndc reload
   changed_when: true

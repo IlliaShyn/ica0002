@@ -9,7 +9,22 @@ server {
     {% if groups['prometheus'] %}
 
 	location /prometheus {
-	    proxy_pass http://IlliaShyn-1:9090;
+	    proxy_pass http://localhost:9090;
 	}
 	{% endif %}
+
+	{% if inventory_hostname in groups['grafana'] %}
+        location /grafana {
+                proxy_set_header Host $http_host;
+                proxy_pass http://localhost:{{ grafana_port }};
+        }
+        {% endif %}
+}
+
+server {
+        listen 8080 default_server;
+
+        location /stub_status {
+                stub_status;
+        }
 }

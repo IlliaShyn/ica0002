@@ -2,3 +2,13 @@
   ansible.builtin.service: 
     name: mysql
     state: restarted
+
+- name: sleep 10
+  ansible.builtin.command:
+    cmd: sleep 10
+
+- name: Restart Exporter
+  ansible.builtin.service: 
+    name: prometheus-mysqld-exporter
+    state: restarted
+  

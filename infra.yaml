@@ -22,6 +22,11 @@
       - prometheus
     tags: 
       - prom
+
+  - name: grafana
+    hosts: grafana
+    roles:
+      - grafana
   
   - name: Database
     hosts: db_servers
@@ -34,3 +39,4 @@
       - agama
       - uwsgi
       - nginx
+

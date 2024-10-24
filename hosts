@@ -1,5 +1,5 @@
-IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=45322 ansible_user=ubuntu
-IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=28222 ansible_user=ubuntu
+IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=39822 ansible_user=ubuntu
+IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=28622 ansible_user=ubuntu
 
 [db_servers]
 IlliaShyn-1
@@ -13,4 +13,7 @@ IlliaShyn-2
 IlliaShyn-2
 
 [prometheus]
+IlliaShyn-2
+
+[grafana]
 IlliaShyn-1

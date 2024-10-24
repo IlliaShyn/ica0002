@@ -1,12 +1,19 @@
 - name: Intsall bind9
   ansible.builtin.apt:
-    name: bind9
+    name: 
+      - bind9
+      - prometheus-bind-exporter
     state: present
 
-- name: Bind is started
+- name: Make sure bind9 is running
   ansible.builtin.service:
-    name: bind9
+    name: "{{ item }}"
     state: started
+    enabled: true
+  loop:
+    - named
+    - prometheus-bind-exporter
+
 
 - name: Configure conf.options
   ansible.builtin.template:
@@ -15,7 +22,9 @@
   with_items: 
     - options
     - local
-  notify: Restart bind
+  notify: 
+    - Restart bind
+    - Restart bind-exporter
 
 - name: Configure zone
   ansible.builtin.template:
