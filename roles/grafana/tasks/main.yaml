@@ -44,5 +44,5 @@
 - name: Dashboards for grafana
   ansible.builtin.copy:
     dest: /var/lib/grafana/dashboards/
-    src: Main.json
+    src: main.json
     mode: '0644'
