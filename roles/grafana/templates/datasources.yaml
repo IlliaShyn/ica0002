@@ -7,3 +7,15 @@ datasources:
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
     url: http://{{groups['prometheus'][0]}}/prometheus
     editable: false
+
+  - name: InfluxDB:latency
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    database: agamadb
+  
+  - name: InfluxDB:telegraf
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    database: telegraf

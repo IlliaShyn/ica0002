@@ -49,4 +49,11 @@ scrape_configs:
         {% for host in groups['web_servers'] -%}
         - {{ host }}:9113
         {% endfor %}
+
+  - job_name: influx
+    static_configs:
+      - targets:
+        {% for host in groups['db_servers'] -%}
+        - {{ host }}:9424
+        {% endfor %}
     

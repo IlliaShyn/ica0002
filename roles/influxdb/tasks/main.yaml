@@ -1,0 +1,65 @@
+- name: make dir for apt key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add InfluxData GPG key
+  apt_key:
+    url: https://repos.influxdata.com/influxdata-archive_compat.key
+    state: present
+    
+- name: Install InfluxDB
+  apt:
+    name: influxdb
+    state: present
+
+- name: Influxdb Conf Template
+  ansible.builtin.template:
+    src: influxdb.conf.j2
+    dest: /etc/influxdb/influxdb.conf
+    mode: '0644'
+  notify: Restart influxdb
+
+- name: Install Telegraf
+  apt:
+    name: telegraf
+    state: present
+
+- name: Telegraf configuration file
+  ansible.builtin.template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify: Restart telegraf
+
+- name: Start Telegraf
+  service:
+    name: telegraf
+    state: started
+    enabled: true  # start on boot 
+
+- name: Start InfluxDB
+  service:
+    name: influxdb
+    state: started
+    enabled: true  # start on boot 
+
+- name: Install Prometheus InfluxDB exporter
+  get_url:
+    url: https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64
+    dest: /usr/local/bin/influxdb_stats_exporter
+    mode: '0500'
+    owner: prometheus 
+  notify: Reload systemd
+  
+- name: Influxdb-stats exporter template
+  ansible.builtin.template:
+    src: prometheus-influxdb-stats-exporter.service.j2
+    dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+  notify: Reload systemd
+
+- name: Make sure exporter is running
+  ansible.builtin.service:
+    name: prometheus-influxdb-stats-exporter
+    state: started
+    enabled: true

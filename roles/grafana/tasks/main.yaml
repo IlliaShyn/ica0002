@@ -42,7 +42,23 @@
   notify: Restart grafana
 
 - name: Dashboards for grafana
+  ansible.builtin.template:
+    src: dashboards.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+    mode: '0644'
+  notify: Restart grafana
+
+
+- name: Dashboards for grafana
   ansible.builtin.copy:
     dest: /var/lib/grafana/dashboards/
     src: main.json
     mode: '0644'
+  notify: Restart grafana
+
+- name: Dashboards for grafana
+  ansible.builtin.copy:
+    dest: /var/lib/grafana/dashboards/
+    src: syslog.json
+    mode: '0644'
+  notify: Restart grafana

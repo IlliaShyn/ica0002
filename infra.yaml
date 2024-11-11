@@ -32,6 +32,11 @@
     hosts: db_servers
     roles: 
       - mysql
+  
+  - name: influxdb
+    hosts: influxdb
+    roles:
+      - influxdb
 
   - name: Nginx
     hosts: web_servers
@@ -39,4 +44,9 @@
       - agama
       - uwsgi
       - nginx
+  
+  - name: agama_client
+    hosts: influxdb
+    roles: 
+      - agama_client
 
