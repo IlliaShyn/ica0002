@@ -31,5 +31,7 @@
     src: zone.j2
     dest: /var/cache/bind/db.agamais.ttu
     mode: '0644'
-  notify: rndc reload bind9
+  notify: 
+    - rndc reload bind9
+    - Restart bind
 

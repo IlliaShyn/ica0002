@@ -37,3 +37,21 @@
     dest: /etc/rsyslog.d/rsyslog.conf
     mode: '0644'
   notify: Restart Rsyslog
+
+- name: Backup user 
+  ansible.builtin.user: 
+    name: backup
+    state: present
+    home: /home/backup
+    shell: /bin/bash
+    generate_ssh_key: true
+  become: yes
+
+- name: Backup template
+  ansible.builtin.template:
+    src: backup_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+    owner: backup
+    group: backup
+    mode: '0700'
+
