@@ -9,10 +9,21 @@
     url: https://repos.influxdata.com/influxdata-archive_compat.key
     state: present
     
+- name: InfluxData APT repository
+  apt_repository:
+    repo: 'deb https://repos.influxdata.com/debian stable main'
+    state: present
+    update_cache: yes
+
+- name: Download InfluxDB 1.8.10 deb
+  get_url:
+    url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
+    dest: /usr/local/bin/influxdb_1.8.10_amd64.deb
+
 - name: Install InfluxDB
   apt:
-    name: influxdb
-    state: present
+    deb: /usr/local/bin/influxdb_1.8.10_amd64.deb
+    update_cache: yes
 
 - name: Influxdb Conf Template
   ansible.builtin.template:
@@ -63,3 +74,15 @@
     name: prometheus-influxdb-stats-exporter
     state: started
     enabled: true
+
+- name: Influx dir with owner
+  ansible.builtin.file:
+    path: /home/backup/influxdb
+    state: directory
+    mode: '0700'
+    owner: backup
+
+- name: InfluxDB backup
+  template:
+    src: influxdb_backup.conf.j2
+    dest: /etc/cron.d/influx-backup

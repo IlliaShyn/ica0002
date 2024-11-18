@@ -69,4 +69,36 @@
     name: prometheus-mysqld-exporter
     state: started
     enabled: yes
-    
+
+- name: backup mysql directory
+  ansible.builtin.file:
+    path: /home/backup/mysql
+    state: directory
+    owner: backup
+    mode: '0700'
+
+- name: Mysql backup user
+  community.mysql.mysql_user:
+    name: "{{ backup_user }}"
+    password: "{{ backup_password }}"
+    priv: "{{ mysql_database }}.*:LOCK TABLES,SELECT"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+  notify: Restart MySQL
+
+- name: my.conf backup template
+  ansible.builtin.template:
+    src: .mybackup.cnf.j2
+    dest: /home/backup/.my.cnf
+    mode: '0400'
+    owner: backup
+    group: backup
+  no_log: true
+
+- name: Make cron backupdump
+  ansible.builtin.template:
+    src: cron_backup.conf.j2
+    dest: /etc/cron.d/mysql-backup
+
+
+  

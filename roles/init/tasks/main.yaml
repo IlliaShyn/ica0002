@@ -55,3 +55,16 @@
     group: backup
     mode: '0700'
 
+- name: Create restore directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/backup/restore
+    owner: backup
+    group: backup
+    mode: 0755
+
+- name: install Duplicity
+  ansible.builtin.apt:
+    name: duplicity
+    state: present
+

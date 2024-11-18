@@ -57,3 +57,9 @@ scrape_configs:
         - {{ host }}:9424
         {% endfor %}
     
+  - job_name: backups
+    static_configs:
+      - targets: 
+        {% for host in groups['db_servers'] -%}
+        - backup.agamais.ttu:9111
+        {% endfor %}
