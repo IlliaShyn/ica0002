@@ -1,3 +1,9 @@
-00 20 * * *  backup  mysqldump agama > /home/backup/mysql/agama.sql
-05 20 * * *  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
-05 20 * * 0-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
+{% if inventory_hostname == mysql_backup_host %}
+19 23 * * *  backup  mysqldump agama > /home/backup/mysql/agama.sql
+20 23 * * *  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
+20 23 * * 0-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
+{% endif %}
+
+
+
+

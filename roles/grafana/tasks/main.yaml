@@ -57,5 +57,6 @@
     - main.json
     - backups.json
     - syslog.json
+    - mysql.json
   notify: Restart grafana
 
