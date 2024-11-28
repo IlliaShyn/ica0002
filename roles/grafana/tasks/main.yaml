@@ -1,56 +1,36 @@
-- name: APT key dir
+- name: Grafana directories
   ansible.builtin.file:
-    path: /etc/apt/keyrings
+    name: /opt/grafana/provisioning/{{ item }}
     state: directory
-    mode: '0755'
-
-- name: Grafana rep key
-  ansible.builtin.get_url:
-    url: https://apt.grafana.com/gpg.key
-    dest: /etc/apt/keyrings/grafana.asc
-    mode: '0644'
-
-- name: Grafana rep
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com/ stable main"
-    state: present
-    update_cache: true
-
-- name: install grafana
-  ansible.builtin.apt:
-    name: grafana
-    state: present
-
-- name: Grafana is running
-  ansible.builtin.service:
-    name: grafana-server
-    state: started
-    enabled: true
+  loop:
+    - dashboards
+    - datasources
 
 - name: run grafana template
   ansible.builtin.template:
     src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
+    dest: /opt/grafana/grafana.ini
     mode: '0644'
+  no_log: true
   notify: Restart grafana
 
 - name: Datasource for grafana
   ansible.builtin.template:
     src: datasources.yaml
-    dest: /etc/grafana/provisioning/datasources/datasources.yaml
+    dest: /opt/grafana/provisioning/datasources/default.yaml
     mode: '0644'
   notify: Restart grafana
 
-- name: Dashboards for grafana
+- name: Dashboards provider for grafana
   ansible.builtin.template:
     src: dashboards.yaml
-    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+    dest: /opt/grafana/provisioning/dashboards/default.yaml
     mode: '0644'
   notify: Restart grafana
 
 - name: Dashboards for grafana
   ansible.builtin.copy:
-    dest: /var/lib/grafana/dashboards/
+    dest: /opt/grafana/provisioning/dashboards/{{ item }}
     src: "{{ item }}"
     mode: '0644'
   loop: 
@@ -59,4 +39,12 @@
     - syslog.json
     - mysql.json
   notify: Restart grafana
+
+- name: Grafana container
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    published_ports: "{{ grafana_port }}:3000"
+    volumes: /opt/grafana:/etc/grafana
+    restart_policy: always
 

@@ -16,17 +16,17 @@
     tags: 
       - res
 
+  - name: docker
+    hosts: docker
+    roles:
+      - docker
+
   - name: Prometheus
     hosts: prometheus
     roles:
       - prometheus
     tags: 
       - prom
-
-  - name: grafana
-    hosts: grafana
-    roles:
-      - grafana
   
   - name: Database
     hosts: db_servers
@@ -34,17 +34,27 @@
       - mysql
     tags:
       - db
+
+  - name: agama
+    hosts: agamas
+    roles: 
+      - agama
+    tags:
+      - ag
   
   - name: influxdb
     hosts: influxdb
     roles:
       - influxdb
 
+  - name: grafana
+    hosts: grafana
+    roles:
+      - grafana
+
   - name: Nginx
     hosts: web_servers
     roles: 
-      - agama
-      - uwsgi
       - nginx
     tags: 
       - web

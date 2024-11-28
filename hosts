@@ -1,5 +1,5 @@
-IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=39722 ansible_user=ubuntu
-IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=30422 ansible_user=ubuntu
+IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=44322 ansible_user=ubuntu
+IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=37622 ansible_user=ubuntu
 
 [db_servers]
 IlliaShyn-1
@@ -20,3 +20,11 @@ IlliaShyn-1
 
 [influxdb]
 IlliaShyn-1
+
+[docker]
+IlliaShyn-1
+IlliaShyn-2
+
+[agamas]
+IlliaShyn-1
+IlliaShyn-2

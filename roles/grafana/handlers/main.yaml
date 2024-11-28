@@ -1,4 +1,7 @@
 - name: Restart grafana
-  ansible.builtin.service: 
-    name: grafana-server
-    state: restarted
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    published_ports: "{{ grafana_port }}:3000"
+    volumes: /opt/grafana:/etc/grafana
+    restart: true

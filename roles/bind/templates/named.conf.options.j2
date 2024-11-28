@@ -1,4 +1,4 @@
-acl localnetwork { {{ localnet }}; {{ localhost }}; };
+acl localnetwork { {{ localnet }}; {{ localhost }}; {{ docker_net }}; };
 options {
 	directory "/var/cache/bind";
 
