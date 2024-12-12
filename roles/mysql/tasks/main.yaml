@@ -1,3 +1,13 @@
+- name: my.conf backup template
+  ansible.builtin.template:
+    src: .mybackup.cnf.j2
+    dest: /home/backup/.my.cnf
+    mode: '0600'
+    owner: backup
+    group: backup
+  no_log: true
+  notify: Restart MySQL
+
 - name: install mysql
   ansible.builtin.apt:
     name: 
@@ -89,20 +99,6 @@
   no_log: true
   notify: Restart MySQL
 
-- name: my.conf backup template
-  ansible.builtin.template:
-    src: .mybackup.cnf.j2
-    dest: /home/backup/.my.cnf
-    mode: '0400'
-    owner: backup
-    group: backup
-  no_log: true
-
-- name: Make cron backupdump
-  ansible.builtin.template:
-    src: cron_backup.conf.j2
-    dest: /etc/cron.d/mysql-backup
-
 - name: Create replication user
   community.mysql.mysql_user:
     name: "{{ mysql_replication_user }}"
@@ -120,4 +116,14 @@
   notify:
     - Reset MySQL source
     - Reset MySQL replica
+
+- name: Make cron backupdump
+  ansible.builtin.template:
+    src: cron_backup.conf.j2
+    dest: /etc/cron.d/mysql-backup
+  notify: Cron restart
+
+
+
+
   

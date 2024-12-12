@@ -63,3 +63,18 @@ scrape_configs:
         {% for host in groups['db_servers'] -%}
         - backup.agamais.ttu:9111
         {% endfor %}
+
+  - job_name: keepalived
+    static_configs:
+      - targets: 
+        {% for host in groups['keepalived'] -%}
+        - {{ host }}:9165
+        {% endfor %}
+
+  - job_name: haproxy
+    static_configs:
+      - targets: 
+        {% for host in groups['haproxy'] -%}
+        - {{ host }}:9101
+        {% endfor %}
+

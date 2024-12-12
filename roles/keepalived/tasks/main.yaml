@@ -1,0 +1,54 @@
+- name: Install keepalived
+  ansible.builtin.apt:
+    name: keepalived
+
+- name: Put keepalived template
+  ansible.builtin.template:
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+    mode: '0644'
+  no_log: true
+  notify: Restart keepalived
+
+- name: Create keepalived_script user
+  ansible.builtin.user:
+    name: keepalived_script
+    home: /home/keepalived_script
+
+- name: Put script for keepalived
+  ansible.builtin.template: 
+    src: vrrp_script.j2
+    dest: /home/keepalived_script/vrrp_script.sh
+    owner: keepalived_script
+    mode: '0700'
+  notify: Restart keepalived
+
+- name: Download keepalived-exporter binary
+  get_url:
+    url: http://backup/keepalived-exporter_1.4.0_linux_amd64.deb
+    dest: /usr/local/bin/keepalived-exporter_1.4.0_linux_amd64.deb
+
+- name: Install keepalived-exporter
+  ansible.builtin.apt:
+    deb: /usr/local/bin/keepalived-exporter_1.4.0_linux_amd64.deb
+
+- name: Copy config file
+  template:
+    src: keepalived-exporter.service.j2
+    dest: /etc/systemd/system/keepalived-exporter.service
+    owner: root
+    mode: '0700'
+  notify: 
+    - Reload systemd
+    - Restart keepalived-exporter
+
+- name: Start keepalived and keepalived-exporter
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - keepalived
+    - keepalived-exporter
+
+  

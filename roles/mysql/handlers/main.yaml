@@ -35,3 +35,8 @@
     - resetreplica
     - startreplica
   when: inventory_hostname != mysql_host
+
+- name: Cron restart
+  ansible.builtin.service: 
+    name: cron
+    state: restarted  

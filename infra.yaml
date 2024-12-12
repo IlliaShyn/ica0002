@@ -6,6 +6,7 @@
   
   - name: DNS
     hosts: dns_servers
+    become: yes
     roles: 
       - bind
 
@@ -63,4 +64,18 @@
     hosts: influxdb
     roles: 
       - agama_client
+
+  - name: haproxy
+    hosts: haproxy
+    roles: 
+      - haproxy
+    tags: 
+      - hap
+
+  - name: keepalived
+    hosts: keepalived
+    roles: 
+      - keepalived
+    tags: 
+      - k
 

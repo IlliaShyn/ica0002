@@ -1,2 +1,4 @@
-nameserver {{ hostvars["IlliaShyn-2"]['ansible_default_ipv4']['address'] }}
 search {{ startup_name }}
+{% for host in groups['dns_secondary'] %}
+nameserver {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+{% endfor %}

@@ -1,0 +1,26 @@
+- name: Install haproxy and prom-exporter
+  ansible.builtin.apt:
+    name:
+      - haproxy
+      - prometheus-haproxy-exporter
+
+- name: Haproxy configuration
+  ansible.builtin.template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: Restart haproxy
+
+- name: Exporter haproxy template 
+  ansible.builtin.template:
+    src: prometheus-haproxy-exporter.j2
+    dest: /etc/default/prometheus-haproxy-exporter
+  notify: Restart prometheus-haproxy-exporter
+
+- name: Start haproxy and prom-exporter
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - haproxy
+    - prometheus-haproxy-exporter

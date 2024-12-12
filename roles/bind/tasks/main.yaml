@@ -5,15 +5,9 @@
       - prometheus-bind-exporter
     state: present
 
-- name: Make sure bind9 is running
-  ansible.builtin.service:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  loop:
-    - named
-    - prometheus-bind-exporter
-
+- name: Install dnspython library
+  apt:
+    name: python3-dnspython
 
 - name: Configure conf.options
   ansible.builtin.template:
@@ -28,10 +22,53 @@
 
 - name: Configure zone
   ansible.builtin.template:
-    src: zone.j2
-    dest: /var/cache/bind/db.agamais.ttu
-    mode: '0644'
+    src: agamais.ttu.j2
+    dest: /var/cache/bind/db.{{ startup_name }}
+    force: no
   notify: 
     - rndc reload bind9
     - Restart bind
 
+- name: Copy reverse zone db
+  template:
+    src: db.reverse
+    dest: /var/cache/bind/db.reverse
+    force: no
+  notify: Restart bind
+  when: inventory_hostname in groups['dns_primary']
+
+- meta: flush_handlers
+
+- name: Make sure bind9 is running
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - bind9
+    - prometheus-bind-exporter
+
+- name: Set A record for backup server
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
+    type: A
+    zone: "{{ startup_name }}"
+    record: backup
+    value: "{{ backup_server_ip }}"
+  when: inventory_hostname in groups['dns_primary']
+
+- name: Set CNAME record for bind9
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
+    zone: "{{ startup_name }}"
+    record: "ns{{ item | replace('IlliaShyn', '') }}"
+    value: "{{ item }}"
+    type: "CNAME"
+  with_items: "{{ groups['dns_servers'] }}"
+  when: inventory_hostname in groups['dns_primary']

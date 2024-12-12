@@ -34,7 +34,7 @@ grafana_password: !vault |
           6566
 grafana_port: 3001 
 backup_server: backup
-backup: 192.168.42.132
+backup_server_ip: 192.168.42.132
 backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 backup_user: backup
 backup_password: !vault |
@@ -57,3 +57,13 @@ mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first |
 app_containers_per_vm: 2
 agama_port: 8001
 docker_net: 172.17.0.0/16
+vrrp_master_vm: IlliaShyn-1
+vrrppass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35316661656537616634656531393831396133333666336537656265303938636239393363353139
+          6232643239653066633130373365326637323965323239610a643562353764316535626566316136
+          37303233323037383535363935626130353630323563373238363334643665366131363361383530
+          3137316637393836360a393766626164356264613735353632356436363764393033313637383639
+          6566
+dns_transfer_key: dJCO/K+rwYgaVX6SIy2jY4M10GS0Pn8Mobb4pV3Zh9w=
+dns_update_key: ZOpHTFuEOdX+aIjLE95z5VjmHAebTC+ZXiMbdiAg5vE=
