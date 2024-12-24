@@ -24,3 +24,15 @@
   loop:
     - haproxy
     - prometheus-haproxy-exporter
+
+- name: Set CNAME record for haproxy
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
+    zone: "{{ startup_name }}"
+    record: "lb{{ item | replace('IlliaShyn', '') }}"
+    value: "{{ item }}"
+    type: "CNAME"
+  with_items: "{{ groups['dns_servers'] }}"

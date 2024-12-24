@@ -1,5 +1,6 @@
-IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=28022 ansible_user=ubuntu
-IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=33122 ansible_user=ubuntu
+IlliaShyn-1 ansible_host=193.40.156.67 ansible_port=29522 ansible_user=ubuntu
+IlliaShyn-2 ansible_host=193.40.156.67 ansible_port=37022 ansible_user=ubuntu
+IlliaShyn-3 ansible_host=193.40.156.67 ansible_port=31522 ansible_user=ubuntu
 
 [db_servers]
 IlliaShyn-1
@@ -8,27 +9,30 @@ IlliaShyn-2
 [web_servers]
 IlliaShyn-1
 IlliaShyn-2
+IlliaShyn-3
 
 [dns_servers:children]
 dns_primary
 dns_secondary
 
 [prometheus]
-IlliaShyn-2
+IlliaShyn-3
 
 [grafana]
-IlliaShyn-1
+IlliaShyn-3
 
 [influxdb]
-IlliaShyn-1
+IlliaShyn-3
 
 [docker]
 IlliaShyn-1
 IlliaShyn-2
+IlliaShyn-3
 
 [agamas]
 IlliaShyn-1
 IlliaShyn-2
+IlliaShyn-3
 
 [keepalived]
 IlliaShyn-1
@@ -39,8 +43,9 @@ IlliaShyn-1
 IlliaShyn-2
 
 [dns_primary]
-IlliaShyn-2
+IlliaShyn-3
 
 [dns_secondary]
 IlliaShyn-1
+IlliaShyn-2
 

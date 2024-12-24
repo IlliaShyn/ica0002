@@ -1,5 +1,5 @@
-00 14 * * 0-6 backup rm -rf /home/backup/influxdb/*
-00 14 * * 0-6  backup  influxd backup -portable -database telegraf /home/backup/influxdb
-00 14 * * 6 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
-00 14 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
-00 14 1 * *  backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/influxdb
+04 14 * * 0-6 backup rm -rf /home/backup/influxdb/*
+05 14 * * 0-6  backup  influxd backup -portable -database telegraf /home/backup/influxdb
+05 14 * * 6 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
+05 14 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
+05 14 1 * *  backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/influxdb

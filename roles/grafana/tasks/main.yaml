@@ -48,3 +48,15 @@
     volumes: /opt/grafana:/etc/grafana
     restart_policy: always
 
+- name: Grafana CNAME record
+  community.general.nsupdate:
+    key_name: "nsupdate.key" 
+    key_secret: "{{ dns_update_key }}" 
+    zone: "{{ startup_name }}"
+    record: "grafana"
+    value: "{{ inventory_hostname }}"
+    type: "CNAME"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+  no_log: true
+

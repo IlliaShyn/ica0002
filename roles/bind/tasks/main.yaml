@@ -2,12 +2,31 @@
   ansible.builtin.apt:
     name: 
       - bind9
-      - prometheus-bind-exporter
+      #- prometheus-bind-exporter
     state: present
 
 - name: Install dnspython library
   apt:
     name: python3-dnspython
+
+- name: Download prometheus-bind-exporter binary
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus-community/bind_exporter/releases/download/v0.6.1/bind_exporter-0.6.1.linux-amd64.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Copy exp file 
+  ansible.builtin.copy:
+    src: /opt/bind_exporter-0.6.1.linux-amd64/bind_exporter
+    dest: /usr/local/bin
+    mode: '0755'
+    remote_src: yes
+
+- name: Create systemd service for prometheus-bind-exporter
+  ansible.builtin.template:
+    dest: /etc/systemd/system/prometheus-bind-exporter.service
+    src: bind-exporter.j2
+  notify: rndc reload bind9
 
 - name: Configure conf.options
   ansible.builtin.template:
