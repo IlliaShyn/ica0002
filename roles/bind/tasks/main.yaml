@@ -38,6 +38,7 @@
   notify: 
     - Restart bind
     - Restart bind-exporter
+  no_log: true
 
 - name: Configure zone
   ansible.builtin.template:

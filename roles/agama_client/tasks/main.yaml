@@ -20,7 +20,7 @@
     dest: /usr/local/bin/agama-client
     mode: '0500'
     owner: agama-client
-  notify: Reload systemd
+  #notify: Reload systemd
 
 - name: agama client service template
   ansible.builtin.template:

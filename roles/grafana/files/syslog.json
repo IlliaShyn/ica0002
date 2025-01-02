@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -1013,7 +1013,7 @@
     }
   ],
   "preload": false,
-  "refresh": " 30s",
+  "refresh": "5s",
   "schemaVersion": 40,
   "tags": [],
   "templating": {

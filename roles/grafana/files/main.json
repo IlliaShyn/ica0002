@@ -775,7 +775,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "nginx_up",
+          "expr": "nginx_up{job=\"nginx\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
