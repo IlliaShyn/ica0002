@@ -47,7 +47,6 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  notify: Restart MySQL
   no_log: true
 
 - name: Install Mysql exporter
@@ -61,7 +60,7 @@
     password: "{{ exporter_password }}"
     priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  notify: Restart MySQL
+  notify: prometheus-mysqld-exporter
   no_log: true
 
 - name: my.conf template

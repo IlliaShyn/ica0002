@@ -30,7 +30,7 @@ listen agama
         bind *:88
 {% for vm in groups['agamas'] %}
 {% for container in range(app_containers_per_vm) %}
-        server {{vm | replace('IlliaShyn-', 'agama')}}-{{ container + 1 }} IlliaShyn-{{ vm.split('-')[1]}}:800{{ container + 1 }} check
+        server {{vm | replace('IlliaShyn-', 'agama')}}-{{ container + 1 }} IlliaShyn-{{ vm.split('-')[1]}}.{{ startup_name }}:800{{ container + 1 }} check
 {% endfor %}
 {% endfor %}
 

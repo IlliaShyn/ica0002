@@ -17,6 +17,14 @@
     mode: '0644'
   notify: Restart prometheus 
 
+- name: Started Nginx and Prometheus nginx exporters
+  service:
+    enabled: yes
+    name: "{{ item }}"
+    state: started
+  loop:
+    - prometheus
+
 - name: Prometheus "CNAME" record
   community.general.nsupdate:
     key_name: "nsupdate.key" 

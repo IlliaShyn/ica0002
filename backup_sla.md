@@ -15,9 +15,9 @@ Services that are backed up:
 
 # [ Schedule ]
 
-    Full backups are performed weekly. Incremental and Differential backups performed every day.
-    Full backup - performed every Sunday at 00:20 - kept for 30 days. Store 4 versions.
-    Incremental backup - (Monday -> Saturday) 00:25 - kept for 30 days. Store 30 versions. RPO - 24 hours. All backups are started automatically by cron.
+    Full backups are performed weekly. Incremental backups performed every day.
+    Full backup - performed every Sunday at 12.04 - kept for 40 days. Store 4 versions.
+    Incremental backup - (Monday -> Saturday) 12.04 - kept for 40 days. Store 30 versions. RPO - 24 hours. All backups are started automatically by cron.
  
 
 # [ Storage ]

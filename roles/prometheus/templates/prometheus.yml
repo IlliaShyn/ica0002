@@ -26,35 +26,35 @@ scrape_configs:
     static_configs:
       - targets: 
         {% for host in groups['all'] -%}
-        - {{ host }}:9100
+        - {{ host }}.{{ startup_name }}:9100
         {% endfor %}
 
   - job_name: mysql
     static_configs:
       - targets:
         {% for host in groups['db_servers'] -%}
-        - {{ host }}:9104
+        - {{ host }}.{{ startup_name }}:9104
         {% endfor %}
 
   - job_name: bind9
     static_configs:
       - targets:
         {% for host in groups['dns_servers'] -%}
-        - {{ host }}:9119
+        - {{ host }}.{{ startup_name }}:9119
         {% endfor %}
 
   - job_name: nginx
     static_configs:
       - targets:
         {% for host in groups['web_servers'] -%}
-        - {{ host }}:9113
+        - {{ host }}.{{ startup_name }}:9113
         {% endfor %}
 
   - job_name: influx
     static_configs:
       - targets:
         {% for host in groups['influxdb'] -%}
-        - {{ host }}:9424
+        - {{ host }}.{{ startup_name }}:9424
         {% endfor %}
     
   - job_name: backups
@@ -68,13 +68,13 @@ scrape_configs:
     static_configs:
       - targets: 
         {% for host in groups['keepalived'] -%}
-        - {{ host }}:9165
+        - {{ host }}.{{ startup_name }}:9165
         {% endfor %}
 
   - job_name: haproxy
     static_configs:
       - targets: 
         {% for host in groups['haproxy'] -%}
-        - {{ host }}:9101
+        - {{ host }}.{{ startup_name }}:9101
         {% endfor %}
 

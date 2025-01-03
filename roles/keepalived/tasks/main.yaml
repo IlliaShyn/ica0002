@@ -20,7 +20,7 @@
     src: vrrp_script.j2
     dest: /home/keepalived_script/vrrp_script.sh
     owner: keepalived_script
-    mode: '0700'
+    mode: '0750'
   notify: Restart keepalived
 
 - name: Download keepalived-exporter binary
