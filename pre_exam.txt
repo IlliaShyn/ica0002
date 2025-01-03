@@ -1,4 +1,4 @@
-Thu Jan  2 23:52:10 EET 2025
+Fri Jan  3 12:47:17 EET 2025
 + hostname
 DESKTOP-P917EEJ
 + ansible-playbook infra.yaml --diff
@@ -6,7 +6,7 @@ DESKTOP-P917EEJ
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-[WARNING]: Platform linux on host IlliaShyn-1 is using the discovered Python
+[WARNING]: Platform linux on host IlliaShyn-2 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
@@ -16,19 +16,19 @@ interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-[WARNING]: Platform linux on host IlliaShyn-2 is using the discovered Python
+[WARNING]: Platform linux on host IlliaShyn-1 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
+ok: [IlliaShyn-1]
 
 TASK [init : Update APT cache] *************************************************
+ok: [IlliaShyn-2]
 changed: [IlliaShyn-1]
 changed: [IlliaShyn-3]
-changed: [IlliaShyn-2]
 
 TASK [init : Install prometheus exporter] **************************************
 The following additional packages will be installed:
@@ -41,17 +41,6 @@ The following NEW packages will be installed:
   moreutils prometheus-node-exporter prometheus-node-exporter-collectors
   smartmontools
 0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
-changed: [IlliaShyn-1]
-The following additional packages will be installed:
-  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
-  moreutils prometheus-node-exporter-collectors smartmontools
-Suggested packages:
-  gsmartcontrol smart-notifier mailx | mailutils
-The following NEW packages will be installed:
-  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
-  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
-  smartmontools
-0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
 changed: [IlliaShyn-3]
 The following additional packages will be installed:
   libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
@@ -64,27 +53,26 @@ The following NEW packages will be installed:
   smartmontools
 0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
 changed: [IlliaShyn-2]
+The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter-collectors smartmontools
+Suggested packages:
+  gsmartcontrol smart-notifier mailx | mailutils
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
+  smartmontools
+0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
+changed: [IlliaShyn-1]
 
 TASK [init : Install CA certificates] ******************************************
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 
 TASK [init : Syslog-telegraph template] ****************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpqeg9qlnx/rsyslogtel.conf
-@@ -0,0 +1,6 @@
-+$ActionQueueType LinkedList # use asynchronous processing
-+$ActionQueueFileName srvrfwd # set file name, also enables disk mode
-+$ActionResumeRetryCount -1 # infinite retries on insert failure
-+$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
-+
-+*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format
-\ No newline at end of file
-
-changed: [IlliaShyn-1]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpcjqn0s0s/rsyslogtel.conf
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpo1i507xv/rsyslogtel.conf
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -96,7 +84,7 @@ changed: [IlliaShyn-1]
 
 changed: [IlliaShyn-2]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp34xiya22/rsyslogtel.conf
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmptzwda79s/rsyslogtel.conf
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -107,24 +95,27 @@ changed: [IlliaShyn-2]
 \ No newline at end of file
 
 changed: [IlliaShyn-3]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpplt7qwx0/rsyslogtel.conf
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format
+\ No newline at end of file
+
+changed: [IlliaShyn-1]
 
 TASK [init : Backup user] ******************************************************
+changed: [IlliaShyn-2]
 changed: [IlliaShyn-3]
 changed: [IlliaShyn-1]
-changed: [IlliaShyn-2]
 
 TASK [init : Backup template] **************************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpe4uuvxfy/backup_hosts.j2
-@@ -0,0 +1,3 @@
-+192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup.agamais.ttu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-\ No newline at end of file
-
-changed: [IlliaShyn-1]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmphnmvvt8j/backup_hosts.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpa_mbb47z/backup_hosts.j2
 @@ -0,0 +1,3 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
@@ -133,7 +124,16 @@ changed: [IlliaShyn-1]
 
 changed: [IlliaShyn-3]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp0qw2y0p4/backup_hosts.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpfx4chdor/backup_hosts.j2
+@@ -0,0 +1,3 @@
++192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup.agamais.ttu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
+\ No newline at end of file
+
+changed: [IlliaShyn-1]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpvmeyv_t1/backup_hosts.j2
 @@ -0,0 +1,3 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
@@ -198,7 +198,7 @@ The following NEW packages will be installed:
   duplicity librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
-changed: [IlliaShyn-3]
+changed: [IlliaShyn-2]
 The following additional packages will be installed:
   librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
@@ -222,18 +222,18 @@ The following NEW packages will be installed:
   duplicity librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 133 not upgraded.
-changed: [IlliaShyn-2]
+changed: [IlliaShyn-3]
 
 RUNNING HANDLER [init : Restart Rsyslog] ***************************************
-changed: [IlliaShyn-2]
-changed: [IlliaShyn-3]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-3]
+changed: [IlliaShyn-2]
 
 PLAY [DNS] *********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 
 TASK [bind : Intsall bind9] ****************************************************
@@ -246,16 +246,6 @@ The following NEW packages will be installed:
 The following packages will be upgraded:
   bind9-dnsutils bind9-host bind9-libs
 3 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-3]
-The following additional packages will be installed:
-  bind9-dnsutils bind9-host bind9-libs bind9-utils dns-root-data
-Suggested packages:
-  bind-doc resolvconf
-The following NEW packages will be installed:
-  bind9 bind9-utils dns-root-data
-The following packages will be upgraded:
-  bind9-dnsutils bind9-host bind9-libs
-3 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
 changed: [IlliaShyn-2]
 The following additional packages will be installed:
   bind9-dnsutils bind9-host bind9-libs bind9-utils dns-root-data
@@ -267,6 +257,16 @@ The following packages will be upgraded:
   bind9-dnsutils bind9-host bind9-libs
 3 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
 changed: [IlliaShyn-1]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-host bind9-libs bind9-utils dns-root-data
+Suggested packages:
+  bind-doc resolvconf
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data
+The following packages will be upgraded:
+  bind9-dnsutils bind9-host bind9-libs
+3 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
+changed: [IlliaShyn-3]
 
 TASK [bind : Install dnspython library] ****************************************
 The following additional packages will be installed:
@@ -276,7 +276,7 @@ Suggested packages:
 The following NEW packages will be installed:
   python3-dnspython python3-requests-toolbelt
 0 upgraded, 2 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-3]
+changed: [IlliaShyn-2]
 The following additional packages will be installed:
   python3-requests-toolbelt
 Suggested packages:
@@ -284,7 +284,7 @@ Suggested packages:
 The following NEW packages will be installed:
   python3-dnspython python3-requests-toolbelt
 0 upgraded, 2 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-2]
+changed: [IlliaShyn-3]
 The following additional packages will be installed:
   python3-requests-toolbelt
 Suggested packages:
@@ -296,8 +296,8 @@ changed: [IlliaShyn-1]
 
 TASK [bind : Download prometheus-bind-exporter binary] *************************
 changed: [IlliaShyn-3]
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [bind : Copy exp file] ****************************************************
 changed: [IlliaShyn-3]
@@ -306,22 +306,7 @@ changed: [IlliaShyn-2]
 
 TASK [bind : Create systemd service for prometheus-bind-exporter] **************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp69w_05qb/bind-exporter.j2
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=Prometheus Bind Exporter
-+After=network.target
-+
-+[Service]
-+User=prometheus
-+ExecStart=/usr/local/bin/bind_exporter
-+
-+[Install]
-+WantedBy=multi-user.target
-
-changed: [IlliaShyn-3]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpy64b2pox/bind-exporter.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmppeewxfoa/bind-exporter.j2
 @@ -0,0 +1,10 @@
 +[Unit]
 +Description=Prometheus Bind Exporter
@@ -336,7 +321,22 @@ changed: [IlliaShyn-3]
 
 changed: [IlliaShyn-1]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpjv42__t2/bind-exporter.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpkcfp_gh4/bind-exporter.j2
+@@ -0,0 +1,10 @@
++[Unit]
++Description=Prometheus Bind Exporter
++After=network.target
++
++[Service]
++User=prometheus
++ExecStart=/usr/local/bin/bind_exporter
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [IlliaShyn-3]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp3tjnmwv0/bind-exporter.j2
 @@ -0,0 +1,10 @@
 +[Unit]
 +Description=Prometheus Bind Exporter
@@ -352,9 +352,9 @@ changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 
 TASK [bind : Configure conf.options] *******************************************
-changed: [IlliaShyn-3] => (item=None)
 changed: [IlliaShyn-2] => (item=None)
 changed: [IlliaShyn-1] => (item=None)
+changed: [IlliaShyn-3] => (item=None)
 changed: [IlliaShyn-3] => (item=None)
 changed: [IlliaShyn-3]
 changed: [IlliaShyn-1] => (item=None)
@@ -364,7 +364,7 @@ changed: [IlliaShyn-2]
 
 TASK [bind : Configure zone] ***************************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpa_755379/agamais.ttu.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp8e_zqx_g/agamais.ttu.j2
 @@ -0,0 +1,17 @@
 +$TTL	604800
 +agamais.ttu.   IN	SOA	 vm2.agamais.ttu. illia.agamais.ttu. (
@@ -377,38 +377,16 @@ TASK [bind : Configure zone] ***************************************************
 +agamais.ttu.    IN    NS    IlliaShyn-3
 +agamais.ttu.    IN    NS    IlliaShyn-1
 +agamais.ttu.    IN    NS    IlliaShyn-2
-+IlliaShyn-3 IN A 192.168.43.46
-+IlliaShyn-1 IN A 192.168.43.53
-+IlliaShyn-2 IN A 192.168.43.93
-+influxdb IN CNAME IlliaShyn-3
-+backup IN A 192.168.42.132
-+
-
-changed: [IlliaShyn-2]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpm9tc7t6w/agamais.ttu.j2
-@@ -0,0 +1,17 @@
-+$TTL	604800
-+agamais.ttu.   IN	SOA	 vm2.agamais.ttu. illia.agamais.ttu. (
-+			      2		; Serial
-+			 604800		; Refresh
-+			  86400		; Retry
-+			2419200		; Expire
-+			 604800 )	; Negative Cache TTL
-+;
-+agamais.ttu.    IN    NS    IlliaShyn-3
-+agamais.ttu.    IN    NS    IlliaShyn-1
-+agamais.ttu.    IN    NS    IlliaShyn-2
-+IlliaShyn-3 IN A 192.168.43.46
-+IlliaShyn-1 IN A 192.168.43.53
-+IlliaShyn-2 IN A 192.168.43.93
++IlliaShyn-3 IN A 192.168.42.174
++IlliaShyn-1 IN A 192.168.42.155
++IlliaShyn-2 IN A 192.168.42.54
 +influxdb IN CNAME IlliaShyn-3
 +backup IN A 192.168.42.132
 +
 
 changed: [IlliaShyn-3]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpct220xmo/agamais.ttu.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp_q8v5mlz/agamais.ttu.j2
 @@ -0,0 +1,17 @@
 +$TTL	604800
 +agamais.ttu.   IN	SOA	 vm2.agamais.ttu. illia.agamais.ttu. (
@@ -421,20 +399,42 @@ changed: [IlliaShyn-3]
 +agamais.ttu.    IN    NS    IlliaShyn-3
 +agamais.ttu.    IN    NS    IlliaShyn-1
 +agamais.ttu.    IN    NS    IlliaShyn-2
-+IlliaShyn-3 IN A 192.168.43.46
-+IlliaShyn-1 IN A 192.168.43.53
-+IlliaShyn-2 IN A 192.168.43.93
++IlliaShyn-3 IN A 192.168.42.174
++IlliaShyn-1 IN A 192.168.42.155
++IlliaShyn-2 IN A 192.168.42.54
 +influxdb IN CNAME IlliaShyn-3
 +backup IN A 192.168.42.132
 +
 
 changed: [IlliaShyn-1]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp087v6byc/agamais.ttu.j2
+@@ -0,0 +1,17 @@
++$TTL	604800
++agamais.ttu.   IN	SOA	 vm2.agamais.ttu. illia.agamais.ttu. (
++			      2		; Serial
++			 604800		; Refresh
++			  86400		; Retry
++			2419200		; Expire
++			 604800 )	; Negative Cache TTL
++;
++agamais.ttu.    IN    NS    IlliaShyn-3
++agamais.ttu.    IN    NS    IlliaShyn-1
++agamais.ttu.    IN    NS    IlliaShyn-2
++IlliaShyn-3 IN A 192.168.42.174
++IlliaShyn-1 IN A 192.168.42.155
++IlliaShyn-2 IN A 192.168.42.54
++influxdb IN CNAME IlliaShyn-3
++backup IN A 192.168.42.132
++
+
+changed: [IlliaShyn-2]
 
 TASK [bind : Copy reverse zone db] *********************************************
 skipping: [IlliaShyn-1]
 skipping: [IlliaShyn-2]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpd4bbdphb/db.reverse
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp6kerj2_o/db.reverse
 @@ -0,0 +1,17 @@
 +$TTL  604800
 +168.192.in-addr.arpa.  IN  SOA  vm2.agamais.ttu. illia.agamais.ttu. (
@@ -448,9 +448,9 @@ skipping: [IlliaShyn-2]
 +168.192.in-addr.arpa.  IN  NS  IlliaShyn-1.agamais.ttu.
 +168.192.in-addr.arpa.  IN  NS  IlliaShyn-2.agamais.ttu.
 +
-+53.43 IN PTR IlliaShyn-1.agamais.ttu.
-+93.43 IN PTR IlliaShyn-2.agamais.ttu.
-+46.43 IN PTR IlliaShyn-3.agamais.ttu.
++155.42 IN PTR IlliaShyn-1.agamais.ttu.
++54.42 IN PTR IlliaShyn-2.agamais.ttu.
++174.42 IN PTR IlliaShyn-3.agamais.ttu.
 +
 +
 
@@ -463,13 +463,13 @@ TASK [bind : meta] *************************************************************
 TASK [bind : meta] *************************************************************
 
 RUNNING HANDLER [bind : Restart bind] ******************************************
-changed: [IlliaShyn-3]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-3]
 changed: [IlliaShyn-2]
 
 RUNNING HANDLER [bind : Restart bind-exporter] *********************************
-changed: [IlliaShyn-3]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-3]
 changed: [IlliaShyn-1]
 
 RUNNING HANDLER [bind : rndc reload bind9] *************************************
@@ -479,11 +479,11 @@ changed: [IlliaShyn-1]
 
 TASK [bind : Make sure bind9 is running] ***************************************
 ok: [IlliaShyn-3] => (item=bind9)
-ok: [IlliaShyn-1] => (item=bind9)
 ok: [IlliaShyn-2] => (item=bind9)
+ok: [IlliaShyn-1] => (item=bind9)
 changed: [IlliaShyn-3] => (item=prometheus-bind-exporter)
-changed: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 changed: [IlliaShyn-1] => (item=prometheus-bind-exporter)
+changed: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 
 TASK [bind : Set A record for backup server] ***********************************
 skipping: [IlliaShyn-1]
@@ -512,12 +512,12 @@ ok: [IlliaShyn-3]
 
 TASK [resolv : Systemd-resolved is shutdown] ***********************************
 changed: [IlliaShyn-3]
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [resolv : Resolv conf] ****************************************************
 --- before: /etc/resolv.conf
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpcxkw16uq/resolv.conf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpvf46e_sr/resolv.conf.j2
 @@ -1,23 +1,3 @@
 -# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
 -# Do not edit.
@@ -543,43 +543,12 @@ TASK [resolv : Resolv conf] ****************************************************
 -options edns0 trust-ad
 -search openstacklocal
 +search agamais.ttu
-+nameserver 192.168.43.53
-+nameserver 192.168.43.93
-
-changed: [IlliaShyn-3]
---- before: /etc/resolv.conf
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpwnd5z5lt/resolv.conf.j2
-@@ -1,23 +1,3 @@
--# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
--# Do not edit.
--#
--# This file might be symlinked as /etc/resolv.conf. If you're looking at
--# /etc/resolv.conf and seeing this text, you have followed the symlink.
--#
--# This is a dynamic resolv.conf file for connecting local clients to the
--# internal DNS stub resolver of systemd-resolved. This file lists all
--# configured search domains.
--#
--# Run "resolvectl status" to see details about the uplink DNS servers
--# currently in use.
--#
--# Third party programs should typically not access this file directly, but only
--# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
--# different way, replace this symlink by a static file or a different symlink.
--#
--# See man:systemd-resolved.service(8) for details about the supported modes of
--# operation for /etc/resolv.conf.
--
--nameserver 127.0.0.53
--options edns0 trust-ad
--search openstacklocal
-+search agamais.ttu
-+nameserver 192.168.43.53
-+nameserver 192.168.43.93
++nameserver 192.168.42.155
++nameserver 192.168.42.54
 
 changed: [IlliaShyn-2]
 --- before: /etc/resolv.conf
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmprthj41c5/resolv.conf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp_t_efxhn/resolv.conf.j2
 @@ -1,23 +1,3 @@
 -# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
 -# Do not edit.
@@ -605,17 +574,48 @@ changed: [IlliaShyn-2]
 -options edns0 trust-ad
 -search openstacklocal
 +search agamais.ttu
-+nameserver 192.168.43.53
-+nameserver 192.168.43.93
++nameserver 192.168.42.155
++nameserver 192.168.42.54
 
 changed: [IlliaShyn-1]
+--- before: /etc/resolv.conf
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp33785szt/resolv.conf.j2
+@@ -1,23 +1,3 @@
+-# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+-# Do not edit.
+-#
+-# This file might be symlinked as /etc/resolv.conf. If you're looking at
+-# /etc/resolv.conf and seeing this text, you have followed the symlink.
+-#
+-# This is a dynamic resolv.conf file for connecting local clients to the
+-# internal DNS stub resolver of systemd-resolved. This file lists all
+-# configured search domains.
+-#
+-# Run "resolvectl status" to see details about the uplink DNS servers
+-# currently in use.
+-#
+-# Third party programs should typically not access this file directly, but only
+-# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+-# different way, replace this symlink by a static file or a different symlink.
+-#
+-# See man:systemd-resolved.service(8) for details about the supported modes of
+-# operation for /etc/resolv.conf.
+-
+-nameserver 127.0.0.53
+-options edns0 trust-ad
+-search openstacklocal
++search agamais.ttu
++nameserver 192.168.42.155
++nameserver 192.168.42.54
+
+changed: [IlliaShyn-3]
 
 PLAY [docker] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [docker : install docker] *************************************************
 The following additional packages will be installed:
@@ -637,7 +637,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 9 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-3]
+changed: [IlliaShyn-1]
 The following additional packages will be installed:
   bridge-utils containerd dnsmasq-base pigz python3-websocket runc ubuntu-fan
 Suggested packages:
@@ -647,7 +647,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 9 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-1]
+changed: [IlliaShyn-3]
 
 TASK [docker : Started docker service] *****************************************
 ok: [IlliaShyn-1]
@@ -678,7 +678,7 @@ changed: [IlliaShyn-3]
 
 TASK [prometheus : Conf for prometheus] ****************************************
 --- before: /etc/prometheus/prometheus.yml
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmphjylp5fq/prometheus.yml
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpjm9hylf3/prometheus.yml
 @@ -1,21 +1,8 @@
 -# Sample config for Prometheus.
 -
@@ -782,7 +782,7 @@ changed: [IlliaShyn-3]
 
 TASK [prometheus : Web template] ***********************************************
 --- before: /etc/default/prometheus
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpk8whbzk2/metrics.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpaqhmy364/metrics.j2
 @@ -1,110 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell escaping, to pass backslashes for regexes, you need to double
@@ -894,7 +894,7 @@ TASK [prometheus : Web template] ***********************************************
 -#    --web.external-url.
 -#  --web.user-assets=<path>
 -#    Path to user asset directory, available at /user.
-+ARGS=--web.external-url=http://IlliaShyn-1:30980/prometheus
++ARGS=--web.external-url=http://IlliaShyn-1:15580/prometheus
 \ No newline at end of file
 
 changed: [IlliaShyn-3]
@@ -908,8 +908,8 @@ changed: [IlliaShyn-3]
 PLAY [Database] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [mysql : my.conf backup template] *****************************************
 changed: [IlliaShyn-1]
@@ -962,46 +962,46 @@ The following NEW packages will be installed:
 changed: [IlliaShyn-2]
 
 TASK [mysql : mysql service is started] ****************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [mysql : mysql override.cnf] **********************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp52v8hywu/override.cnf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmps4mn7rn6/override.cnf.j2
 @@ -0,0 +1,6 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 349
++server-id = 54
 \ No newline at end of file
 
 changed: [IlliaShyn-2]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmppl1lkqdr/override.cnf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp0nsz6mcq/override.cnf.j2
 @@ -0,0 +1,6 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 309
++server-id = 155
 \ No newline at end of file
 
 changed: [IlliaShyn-1]
 
 TASK [mysql : create database] *************************************************
-changed: [IlliaShyn-2]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 
 TASK [mysql : Create directory] ************************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [mysql : MySQL user] ******************************************************
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [mysql : Install Mysql exporter] ******************************************
 The following NEW packages will be installed:
@@ -1018,8 +1018,8 @@ changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 
 TASK [mysql : my.conf template] ************************************************
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [mysql : meta] ************************************************************
 
@@ -1030,8 +1030,8 @@ changed: [IlliaShyn-2]
 changed: [IlliaShyn-1]
 
 RUNNING HANDLER [mysql : sleep 10] *********************************************
-changed: [IlliaShyn-2]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 
 RUNNING HANDLER [mysql : Restart Exporter] *************************************
 changed: [IlliaShyn-1]
@@ -1098,36 +1098,39 @@ changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 
 TASK [mysql : community.mysql.mysql_variables] *********************************
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [mysql : Make cron backupdump] ********************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpd09ak4q8/cron_backup.conf.j2
-@@ -0,0 +1 @@
-+
-
-changed: [IlliaShyn-1]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp8z9yb_e1/cron_backup.conf.j2
-@@ -0,0 +1,3 @@
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpdj9d4mk2/cron_backup.conf.j2
+@@ -0,0 +1,5 @@
 +00 12 * * *  backup  mysqldump agama > /home/backup/mysql/agama.sql
 +04 12 * * 0  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
 +04 12 * * 0-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://IlliaShyn@backup.agamais.ttu/mysql
++04 12 1 * *  backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/mysql
++
 
 changed: [IlliaShyn-2]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpm0o7tiqb/cron_backup.conf.j2
+@@ -0,0 +1,2 @@
++
++
+
+changed: [IlliaShyn-1]
 
 TASK [mysql : Set CNAME record for mysql] **************************************
-ok: [IlliaShyn-2] => (item=IlliaShyn-3)
-changed: [IlliaShyn-1] => (item=IlliaShyn-3)
-changed: [IlliaShyn-2] => (item=IlliaShyn-1)
-ok: [IlliaShyn-1] => (item=IlliaShyn-1)
-changed: [IlliaShyn-2] => (item=IlliaShyn-2)
-ok: [IlliaShyn-1] => (item=IlliaShyn-2)
+changed: [IlliaShyn-2] => (item=IlliaShyn-3)
+ok: [IlliaShyn-1] => (item=IlliaShyn-3)
+changed: [IlliaShyn-1] => (item=IlliaShyn-1)
+ok: [IlliaShyn-2] => (item=IlliaShyn-1)
+changed: [IlliaShyn-1] => (item=IlliaShyn-2)
+ok: [IlliaShyn-2] => (item=IlliaShyn-2)
 
 RUNNING HANDLER [mysql : Restart MySQL] ****************************************
-changed: [IlliaShyn-2]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 
 RUNNING HANDLER [mysql : Reset MySQL source] ***********************************
 skipping: [IlliaShyn-2] => (item=stopreplica) 
@@ -1168,16 +1171,6 @@ TASK [agama : Create /opt/agama directory] *************************************
 +    "state": "directory"
  }
 
-changed: [IlliaShyn-3]
---- before
-+++ after
-@@ -1,4 +1,4 @@
- {
-     "path": "/opt/agama",
--    "state": "absent"
-+    "state": "directory"
- }
-
 changed: [IlliaShyn-1]
 --- before
 +++ after
@@ -1189,30 +1182,40 @@ changed: [IlliaShyn-1]
  }
 
 changed: [IlliaShyn-2]
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/agama",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [IlliaShyn-3]
 
 TASK [agama : Install AGAMA files] *********************************************
+changed: [IlliaShyn-2] => (item=agama.py)
 changed: [IlliaShyn-3] => (item=agama.py)
 changed: [IlliaShyn-1] => (item=agama.py)
-changed: [IlliaShyn-2] => (item=agama.py)
-changed: [IlliaShyn-3] => (item=Dockerfile)
 changed: [IlliaShyn-1] => (item=Dockerfile)
 changed: [IlliaShyn-2] => (item=Dockerfile)
+changed: [IlliaShyn-3] => (item=Dockerfile)
 
 TASK [agama : Agama image] *****************************************************
+changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 changed: [IlliaShyn-3]
-changed: [IlliaShyn-1]
 
 TASK [agama : Agama container] *************************************************
 changed: [IlliaShyn-1] => (item=None)
+changed: [IlliaShyn-2] => (item=None)
 changed: [IlliaShyn-3] => (item=None)
 changed: [IlliaShyn-2] => (item=None)
+changed: [IlliaShyn-2]
 changed: [IlliaShyn-1] => (item=None)
 changed: [IlliaShyn-1]
 changed: [IlliaShyn-3] => (item=None)
 changed: [IlliaShyn-3]
-changed: [IlliaShyn-2] => (item=None)
-changed: [IlliaShyn-2]
 
 PLAY [influxdb] ****************************************************************
 
@@ -1247,7 +1250,7 @@ changed: [IlliaShyn-3]
 
 TASK [influxdb : Influxdb Conf Template] ***************************************
 --- before: /etc/influxdb/influxdb.conf
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpgqfacj_z/influxdb.conf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpfj6y_5t5/influxdb.conf.j2
 @@ -1,596 +1,10 @@
 -### Welcome to the InfluxDB configuration file.
 -
@@ -1873,7 +1876,7 @@ changed: [IlliaShyn-3]
 
 TASK [influxdb : Influxdb-stats exporter template] *****************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp3nlsu9eh/prometheus-influxdb-stats-exporter.service.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpa81em9i5/prometheus-influxdb-stats-exporter.service.j2
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Prometheus InfluxDB Statistic Exporter
@@ -1910,14 +1913,12 @@ changed: [IlliaShyn-3]
 
 TASK [influxdb : InfluxDB backup] **********************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpj4bf7sen/influxdb_backup.conf.j2
-@@ -0,0 +1,5 @@
-+04 14 * * 0-6 backup rm -rf /home/backup/influxdb/*
-+05 14 * * 0-6  backup  influxd backup -portable -database telegraf /home/backup/influxdb
-+05 14 * * 6 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
-+05 14 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
-+05 14 1 * *  backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/influxdb
-\ No newline at end of file
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp2t0rp6rg/influxdb_backup.conf.j2
+@@ -0,0 +1,4 @@
++00 12 * * * backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
++04 12 * * 6 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
++04 12 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
++04 12 1 * * backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/influxdb
 
 changed: [IlliaShyn-3]
 
@@ -1932,6 +1933,9 @@ changed: [IlliaShyn-3]
 
 RUNNING HANDLER [influxdb : Reload systemd] ************************************
 ok: [IlliaShyn-3]
+
+RUNNING HANDLER [influxdb : Cron restart] **************************************
+changed: [IlliaShyn-3]
 
 PLAY [grafana] *****************************************************************
 
@@ -1965,7 +1969,7 @@ changed: [IlliaShyn-3]
 
 TASK [grafana : Datasource for grafana] ****************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpe6cdcp3w/datasources.yaml
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpm4__90xo/datasources.yaml
 @@ -0,0 +1,21 @@
 +apiVersion: 1
 +datasources:
@@ -1994,7 +1998,7 @@ changed: [IlliaShyn-3]
 
 TASK [grafana : Dashboards provider for grafana] *******************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpyiwez0s8/dashboards.yaml
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpjmyefbpz/dashboards.yaml
 @@ -0,0 +1,11 @@
 +# # config file version
 +apiVersion: 1
@@ -4960,26 +4964,10 @@ PLAY [Nginx] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [nginx : Install Nginx] ***************************************************
-The following additional packages will be installed:
-  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
-  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
-  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
-  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
-  libwebp7 libxpm4 nginx-common nginx-core
-Suggested packages:
-  libgd-tools fcgiwrap nginx-doc ssl-cert
-The following NEW packages will be installed:
-  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
-  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
-  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
-  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
-  libwebp7 libxpm4 nginx nginx-common nginx-core prometheus-nginx-exporter
-0 upgraded, 21 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-2]
 The following additional packages will be installed:
   fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
   libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
@@ -5010,12 +4998,252 @@ The following NEW packages will be installed:
   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
   libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
   libwebp7 libxpm4 nginx nginx-common nginx-core prometheus-nginx-exporter
+0 upgraded, 21 newly installed, 0 to remove and 130 not upgraded.
+changed: [IlliaShyn-2]
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
+  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
+  libwebp7 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
+  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
+  libwebp7 libxpm4 nginx nginx-common nginx-core prometheus-nginx-exporter
 0 upgraded, 21 newly installed, 0 to remove and 131 not upgraded.
 changed: [IlliaShyn-3]
 
 TASK [nginx : Copy conf for nginx] *********************************************
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpo2mpwvuz/default.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpqf8xgc4o/default.j2
+@@ -1,91 +1,22 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
+-
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+-
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+ 	server_name _;
+-
++    
+ 	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
++             proxy_set_header Host $http_host;
++	     proxy_pass http://localhost:8001;
++        }
++        
++	location /prometheus {
++	    proxy_pass http://localhost:9090;
++	}
++	
+ 	}
+ 
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
++server {
++        listen 8080 default_server;
+ 
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
+-}
+-
+-
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++        location /stub_status {
++                stub_status;
++        }
++}
+\ No newline at end of file
+
+changed: [IlliaShyn-1]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp9p525z3f/default.j2
+@@ -1,91 +1,22 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
+-
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+-
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+ 	server_name _;
+-
++    
+ 	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
++             proxy_set_header Host $http_host;
++	     proxy_pass http://localhost:8001;
++        }
++        
++	location /prometheus {
++	    proxy_pass http://localhost:9090;
++	}
++	
+ 	}
+ 
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
++server {
++        listen 8080 default_server;
+ 
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
+-}
+-
+-
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++        location /stub_status {
++                stub_status;
++        }
++}
+\ No newline at end of file
+
+changed: [IlliaShyn-2]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp_gtsyyb9/default.j2
 @@ -1,91 +1,26 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -5133,243 +5361,19 @@ TASK [nginx : Copy conf for nginx] *********************************************
 \ No newline at end of file
 
 changed: [IlliaShyn-3]
---- before: /etc/nginx/sites-enabled/default
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpkgnagqvr/default.j2
-@@ -1,91 +1,22 @@
--##
--# You should look at the following URL's in order to grasp a solid understanding
--# of Nginx configuration files in order to fully unleash the power of Nginx.
--# https://www.nginx.com/resources/wiki/start/
--# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
--# https://wiki.debian.org/Nginx/DirectoryStructure
--#
--# In most cases, administrators will remove this file from sites-enabled/ and
--# leave it as reference inside of sites-available where it will continue to be
--# updated by the nginx packaging team.
--#
--# This file will automatically load configuration files provided by other
--# applications, such as Drupal or Wordpress. These applications will be made
--# available underneath a path with that package name, such as /drupal8.
--#
--# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
--##
--
--# Default server configuration
--#
- server {
- 	listen 80 default_server;
--	listen [::]:80 default_server;
--
--	# SSL configuration
--	#
--	# listen 443 ssl default_server;
--	# listen [::]:443 ssl default_server;
--	#
--	# Note: You should disable gzip for SSL traffic.
--	# See: https://bugs.debian.org/773332
--	#
--	# Read up on ssl_ciphers to ensure a secure configuration.
--	# See: https://bugs.debian.org/765782
--	#
--	# Self signed certs generated by the ssl-cert package
--	# Don't use them in a production server!
--	#
--	# include snippets/snakeoil.conf;
--
--	root /var/www/html;
--
--	# Add index.php to the list if you are using PHP
--	index index.html index.htm index.nginx-debian.html;
--
- 	server_name _;
--
-+    
- 	location / {
--		# First attempt to serve request as file, then
--		# as directory, then fall back to displaying a 404.
--		try_files $uri $uri/ =404;
-+             proxy_set_header Host $http_host;
-+	     proxy_pass http://localhost:8001;
-+        }
-+        
-+	location /prometheus {
-+	    proxy_pass http://localhost:9090;
-+	}
-+	
- 	}
- 
--	# pass PHP scripts to FastCGI server
--	#
--	#location ~ \.php$ {
--	#	include snippets/fastcgi-php.conf;
--	#
--	#	# With php-fpm (or other unix sockets):
--	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
--	#	# With php-cgi (or other tcp sockets):
--	#	fastcgi_pass 127.0.0.1:9000;
--	#}
-+server {
-+        listen 8080 default_server;
- 
--	# deny access to .htaccess files, if Apache's document root
--	# concurs with nginx's one
--	#
--	#location ~ /\.ht {
--	#	deny all;
--	#}
--}
--
--
--# Virtual Host configuration for example.com
--#
--# You can move that to a different file under sites-available/ and symlink that
--# to sites-enabled/ to enable it.
--#
--#server {
--#	listen 80;
--#	listen [::]:80;
--#
--#	server_name example.com;
--#
--#	root /var/www/example.com;
--#	index index.html;
--#
--#	location / {
--#		try_files $uri $uri/ =404;
--#	}
--#}
-+        location /stub_status {
-+                stub_status;
-+        }
-+}
-\ No newline at end of file
-
-changed: [IlliaShyn-1]
---- before: /etc/nginx/sites-enabled/default
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp82zqo773/default.j2
-@@ -1,91 +1,22 @@
--##
--# You should look at the following URL's in order to grasp a solid understanding
--# of Nginx configuration files in order to fully unleash the power of Nginx.
--# https://www.nginx.com/resources/wiki/start/
--# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
--# https://wiki.debian.org/Nginx/DirectoryStructure
--#
--# In most cases, administrators will remove this file from sites-enabled/ and
--# leave it as reference inside of sites-available where it will continue to be
--# updated by the nginx packaging team.
--#
--# This file will automatically load configuration files provided by other
--# applications, such as Drupal or Wordpress. These applications will be made
--# available underneath a path with that package name, such as /drupal8.
--#
--# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
--##
--
--# Default server configuration
--#
- server {
- 	listen 80 default_server;
--	listen [::]:80 default_server;
--
--	# SSL configuration
--	#
--	# listen 443 ssl default_server;
--	# listen [::]:443 ssl default_server;
--	#
--	# Note: You should disable gzip for SSL traffic.
--	# See: https://bugs.debian.org/773332
--	#
--	# Read up on ssl_ciphers to ensure a secure configuration.
--	# See: https://bugs.debian.org/765782
--	#
--	# Self signed certs generated by the ssl-cert package
--	# Don't use them in a production server!
--	#
--	# include snippets/snakeoil.conf;
--
--	root /var/www/html;
--
--	# Add index.php to the list if you are using PHP
--	index index.html index.htm index.nginx-debian.html;
--
- 	server_name _;
--
-+    
- 	location / {
--		# First attempt to serve request as file, then
--		# as directory, then fall back to displaying a 404.
--		try_files $uri $uri/ =404;
-+             proxy_set_header Host $http_host;
-+	     proxy_pass http://localhost:8001;
-+        }
-+        
-+	location /prometheus {
-+	    proxy_pass http://localhost:9090;
-+	}
-+	
- 	}
- 
--	# pass PHP scripts to FastCGI server
--	#
--	#location ~ \.php$ {
--	#	include snippets/fastcgi-php.conf;
--	#
--	#	# With php-fpm (or other unix sockets):
--	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
--	#	# With php-cgi (or other tcp sockets):
--	#	fastcgi_pass 127.0.0.1:9000;
--	#}
-+server {
-+        listen 8080 default_server;
- 
--	# deny access to .htaccess files, if Apache's document root
--	# concurs with nginx's one
--	#
--	#location ~ /\.ht {
--	#	deny all;
--	#}
--}
--
--
--# Virtual Host configuration for example.com
--#
--# You can move that to a different file under sites-available/ and symlink that
--# to sites-enabled/ to enable it.
--#
--#server {
--#	listen 80;
--#	listen [::]:80;
--#
--#	server_name example.com;
--#
--#	root /var/www/example.com;
--#	index index.html;
--#
--#	location / {
--#		try_files $uri $uri/ =404;
--#	}
--#}
-+        location /stub_status {
-+                stub_status;
-+        }
-+}
-\ No newline at end of file
-
-changed: [IlliaShyn-2]
 
 TASK [nginx : Started Nginx and Prometheus nginx exporters] ********************
+ok: [IlliaShyn-1] => (item=nginx)
 ok: [IlliaShyn-2] => (item=nginx)
 ok: [IlliaShyn-3] => (item=nginx)
-ok: [IlliaShyn-1] => (item=nginx)
 changed: [IlliaShyn-2] => (item=prometheus-nginx-exporter)
-changed: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
 changed: [IlliaShyn-1] => (item=prometheus-nginx-exporter)
+changed: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
 
 RUNNING HANDLER [nginx : Restart nginx] ****************************************
-changed: [IlliaShyn-2]
-changed: [IlliaShyn-3]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-3]
+changed: [IlliaShyn-2]
 
 RUNNING HANDLER [nginx : sleep 10] *********************************************
 changed: [IlliaShyn-1]
@@ -5377,8 +5381,8 @@ changed: [IlliaShyn-2]
 changed: [IlliaShyn-3]
 
 RUNNING HANDLER [nginx : Restart nginx exporter] *******************************
-changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 changed: [IlliaShyn-3]
 
 PLAY [agama_client] ************************************************************
@@ -5409,7 +5413,7 @@ changed: [IlliaShyn-3]
 
 TASK [agama_client : agama client template] ************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp5z4sifkn/agama-client
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpyw7k6h36/agama-client
 @@ -0,0 +1,70 @@
 +#!/bin/bash -eu
 +
@@ -5487,7 +5491,7 @@ changed: [IlliaShyn-3]
 
 TASK [agama_client : agama client service template] ****************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpwqp29s1o/agama-client.service.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpkpu8hcy4/agama-client.service.j2
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Agama Client Service
@@ -5508,7 +5512,7 @@ ok: [IlliaShyn-3]
 
 TASK [agama_client : agama client config template] *****************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp5201h17j/agama-client.conf.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpcqcc6m4y/agama-client.conf.j2
 @@ -0,0 +1,3 @@
 +database_url=http://influxdb:8086
 +database_name=agamadb
@@ -5541,7 +5545,7 @@ Suggested packages:
 The following NEW packages will be installed:
   haproxy liblua5.3-0 prometheus-haproxy-exporter
 0 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 The following additional packages will be installed:
   liblua5.3-0
 Suggested packages:
@@ -5549,11 +5553,11 @@ Suggested packages:
 The following NEW packages will be installed:
   haproxy liblua5.3-0 prometheus-haproxy-exporter
 0 upgraded, 3 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [haproxy : Haproxy configuration] *****************************************
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpwy5gwvco/haproxy.cfg.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp_i_je_pv/haproxy.cfg.j2
 @@ -1,34 +1,43 @@
 +# Global settings
  global
@@ -5631,7 +5635,7 @@ TASK [haproxy : Haproxy configuration] *****************************************
 
 changed: [IlliaShyn-1]
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp0bml5trr/haproxy.cfg.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpr7tqjoe2/haproxy.cfg.j2
 @@ -1,34 +1,43 @@
 +# Global settings
  global
@@ -5711,7 +5715,7 @@ changed: [IlliaShyn-2]
 
 TASK [haproxy : Exporter haproxy template] *************************************
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpsid9zae8/prometheus-haproxy-exporter.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpmt93gdbs/prometheus-haproxy-exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -5753,7 +5757,7 @@ TASK [haproxy : Exporter haproxy template] *************************************
 
 changed: [IlliaShyn-1]
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpsjci72w0/prometheus-haproxy-exporter.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpz9mf19i8/prometheus-haproxy-exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -5796,18 +5800,18 @@ changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 
 TASK [haproxy : Start haproxy and prom-exporter] *******************************
-ok: [IlliaShyn-2] => (item=haproxy)
 ok: [IlliaShyn-1] => (item=haproxy)
-ok: [IlliaShyn-2] => (item=prometheus-haproxy-exporter)
+ok: [IlliaShyn-2] => (item=haproxy)
 ok: [IlliaShyn-1] => (item=prometheus-haproxy-exporter)
+ok: [IlliaShyn-2] => (item=prometheus-haproxy-exporter)
 
 TASK [haproxy : Set CNAME record for haproxy] **********************************
 changed: [IlliaShyn-1] => (item=IlliaShyn-3)
 ok: [IlliaShyn-2] => (item=IlliaShyn-3)
 changed: [IlliaShyn-1] => (item=IlliaShyn-1)
 ok: [IlliaShyn-2] => (item=IlliaShyn-1)
-changed: [IlliaShyn-2] => (item=IlliaShyn-2)
-ok: [IlliaShyn-1] => (item=IlliaShyn-2)
+changed: [IlliaShyn-1] => (item=IlliaShyn-2)
+ok: [IlliaShyn-2] => (item=IlliaShyn-2)
 
 RUNNING HANDLER [haproxy : Restart haproxy] ************************************
 changed: [IlliaShyn-1]
@@ -5820,8 +5824,8 @@ changed: [IlliaShyn-2]
 PLAY [keepalived] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [keepalived : Install keepalived] *****************************************
 The following additional packages will be installed:
@@ -5831,7 +5835,7 @@ Suggested packages:
 The following NEW packages will be installed:
   ipvsadm keepalived libsensors-config libsensors5 libsnmp-base libsnmp40
 0 upgraded, 6 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 The following additional packages will be installed:
   ipvsadm libsensors-config libsensors5 libsnmp-base libsnmp40
 Suggested packages:
@@ -5839,7 +5843,7 @@ Suggested packages:
 The following NEW packages will be installed:
   ipvsadm keepalived libsensors-config libsensors5 libsnmp-base libsnmp40
 0 upgraded, 6 newly installed, 0 to remove and 130 not upgraded.
-changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 
 TASK [keepalived : Put keepalived template] ************************************
 changed: [IlliaShyn-1]
@@ -5851,7 +5855,7 @@ changed: [IlliaShyn-1]
 
 TASK [keepalived : Put script for keepalived] **********************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp4x3meu9q/vrrp_script.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmp631cxil0/vrrp_script.j2
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
@@ -5859,7 +5863,7 @@ TASK [keepalived : Put script for keepalived] **********************************
 
 changed: [IlliaShyn-1]
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpyfojvzek/vrrp_script.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpbnx59sd1/vrrp_script.j2
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
@@ -5868,8 +5872,8 @@ changed: [IlliaShyn-1]
 changed: [IlliaShyn-2]
 
 TASK [keepalived : Download keepalived-exporter binary] ************************
-changed: [IlliaShyn-2]
 changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 
 TASK [keepalived : Install keepalived-exporter] ********************************
 Selecting previously unselected package keepalived-exporter.
@@ -5877,34 +5881,17 @@ Selecting previously unselected package keepalived-exporter.
 Preparing to unpack .../keepalived-exporter_1.4.0_linux_amd64.deb ...
 Unpacking keepalived-exporter (1.4.0) ...
 Setting up keepalived-exporter (1.4.0) ...
-changed: [IlliaShyn-2]
+changed: [IlliaShyn-1]
 Selecting previously unselected package keepalived-exporter.
 (Reading database ... 59463 files and directories currently installed.)
 Preparing to unpack .../keepalived-exporter_1.4.0_linux_amd64.deb ...
 Unpacking keepalived-exporter (1.4.0) ...
 Setting up keepalived-exporter (1.4.0) ...
-changed: [IlliaShyn-1]
+changed: [IlliaShyn-2]
 
 TASK [keepalived : Copy config file] *******************************************
 --- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmp3i2izkjb/keepalived-exporter.service.j2
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Keepalived-exporter
-+After=network.target
-+
-+[Service]
-+Type=simple
-+User=root
-+ExecStart=/usr/bin/keepalived-exporter
-+
-+[Install]
-+WantedBy=multi-user.target
-\ No newline at end of file
-
-changed: [IlliaShyn-1]
---- before
-+++ after: /root/.ansible/tmp/ansible-local-444460zgzkwzhe/tmpfcr8t2qq/keepalived-exporter.service.j2
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpp3f9o3a1/keepalived-exporter.service.j2
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Keepalived-exporter
@@ -5920,12 +5907,29 @@ changed: [IlliaShyn-1]
 \ No newline at end of file
 
 changed: [IlliaShyn-2]
+--- before
++++ after: /root/.ansible/tmp/ansible-local-486975wx9hfgb3/tmpst1w1a_8/keepalived-exporter.service.j2
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Keepalived-exporter
++After=network.target
++
++[Service]
++Type=simple
++User=root
++ExecStart=/usr/bin/keepalived-exporter
++
++[Install]
++WantedBy=multi-user.target
+\ No newline at end of file
+
+changed: [IlliaShyn-1]
 
 TASK [keepalived : Start keepalived and keepalived-exporter] *******************
-changed: [IlliaShyn-2] => (item=keepalived)
 changed: [IlliaShyn-1] => (item=keepalived)
-changed: [IlliaShyn-2] => (item=keepalived-exporter)
+changed: [IlliaShyn-2] => (item=keepalived)
 changed: [IlliaShyn-1] => (item=keepalived-exporter)
+changed: [IlliaShyn-2] => (item=keepalived-exporter)
 
 RUNNING HANDLER [keepalived : Restart keepalived] ******************************
 changed: [IlliaShyn-1]
@@ -5941,20 +5945,20 @@ ok: [IlliaShyn-2]
 
 PLAY RECAP *********************************************************************
 IlliaShyn-1                : ok=85   changed=69   unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
-IlliaShyn-2                : ok=85   changed=69   unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
-IlliaShyn-3                : ok=89   changed=73   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+IlliaShyn-2                : ok=85   changed=67   unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+IlliaShyn-3                : ok=90   changed=74   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
 
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-[WARNING]: Platform linux on host IlliaShyn-2 is using the discovered Python
+[WARNING]: Platform linux on host IlliaShyn-1 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-[WARNING]: Platform linux on host IlliaShyn-1 is using the discovered Python
+[WARNING]: Platform linux on host IlliaShyn-2 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
@@ -5964,34 +5968,34 @@ interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 
 TASK [init : Update APT cache] *************************************************
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [init : Install prometheus exporter] **************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 
 TASK [init : Install CA certificates] ******************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 
 TASK [init : Syslog-telegraph template] ****************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [init : Backup user] ******************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [init : Backup template] **************************************************
 ok: [IlliaShyn-1]
@@ -6005,35 +6009,35 @@ ok: [IlliaShyn-3]
 
 TASK [init : install Duplicity] ************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 PLAY [DNS] *********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [bind : Intsall bind9] ****************************************************
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 
 TASK [bind : Install dnspython library] ****************************************
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-3]
 
 TASK [bind : Download prometheus-bind-exporter binary] *************************
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 
 TASK [bind : Copy exp file] ****************************************************
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-3]
 
 TASK [bind : Create systemd service for prometheus-bind-exporter] **************
 ok: [IlliaShyn-3]
@@ -6052,8 +6056,8 @@ ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-2]
 
 TASK [bind : Configure zone] ***************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 
 TASK [bind : Copy reverse zone db] *********************************************
@@ -6068,12 +6072,12 @@ TASK [bind : meta] *************************************************************
 TASK [bind : meta] *************************************************************
 
 TASK [bind : Make sure bind9 is running] ***************************************
+ok: [IlliaShyn-1] => (item=bind9)
 ok: [IlliaShyn-3] => (item=bind9)
 ok: [IlliaShyn-2] => (item=bind9)
-ok: [IlliaShyn-1] => (item=bind9)
-ok: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 ok: [IlliaShyn-1] => (item=prometheus-bind-exporter)
 ok: [IlliaShyn-3] => (item=prometheus-bind-exporter)
+ok: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 
 TASK [bind : Set A record for backup server] ***********************************
 skipping: [IlliaShyn-1]
@@ -6096,36 +6100,36 @@ ok: [IlliaShyn-3] => (item=IlliaShyn-2)
 PLAY [Resolv] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [resolv : Systemd-resolved is shutdown] ***********************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [resolv : Resolv conf] ****************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 PLAY [docker] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [docker : install docker] *************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [docker : Started docker service] *****************************************
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 
 PLAY [Prometheus] **************************************************************
 
@@ -6147,8 +6151,8 @@ ok: [IlliaShyn-3]
 PLAY [Database] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : my.conf backup template] *****************************************
 ok: [IlliaShyn-1]
@@ -6159,8 +6163,8 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : mysql service is started] ****************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : mysql override.cnf] **********************************************
 ok: [IlliaShyn-1]
@@ -6175,8 +6179,8 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : MySQL user] ******************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : Install Mysql exporter] ******************************************
 ok: [IlliaShyn-1]
@@ -6223,8 +6227,8 @@ ok: [IlliaShyn-1] => (item=IlliaShyn-3)
 ok: [IlliaShyn-2] => (item=IlliaShyn-3)
 ok: [IlliaShyn-1] => (item=IlliaShyn-1)
 ok: [IlliaShyn-2] => (item=IlliaShyn-1)
-ok: [IlliaShyn-2] => (item=IlliaShyn-2)
 ok: [IlliaShyn-1] => (item=IlliaShyn-2)
+ok: [IlliaShyn-2] => (item=IlliaShyn-2)
 
 PLAY [agama] *******************************************************************
 
@@ -6235,32 +6239,32 @@ ok: [IlliaShyn-3]
 
 TASK [agama : Create /opt/agama directory] *************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [agama : Install AGAMA files] *********************************************
+ok: [IlliaShyn-2] => (item=agama.py)
 ok: [IlliaShyn-1] => (item=agama.py)
 ok: [IlliaShyn-3] => (item=agama.py)
-ok: [IlliaShyn-2] => (item=agama.py)
-ok: [IlliaShyn-1] => (item=Dockerfile)
 ok: [IlliaShyn-2] => (item=Dockerfile)
 ok: [IlliaShyn-3] => (item=Dockerfile)
+ok: [IlliaShyn-1] => (item=Dockerfile)
 
 TASK [agama : Agama image] *****************************************************
-ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [agama : Agama container] *************************************************
-ok: [IlliaShyn-3] => (item=None)
-ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-1] => (item=None)
+ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-3] => (item=None)
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1] => (item=None)
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3] => (item=None)
+ok: [IlliaShyn-3]
 
 PLAY [influxdb] ****************************************************************
 
@@ -6348,27 +6352,27 @@ ok: [IlliaShyn-3]
 PLAY [Nginx] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
 
 TASK [nginx : Install Nginx] ***************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [nginx : Copy conf for nginx] *********************************************
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 
 TASK [nginx : Started Nginx and Prometheus nginx exporters] ********************
-ok: [IlliaShyn-2] => (item=nginx)
 ok: [IlliaShyn-1] => (item=nginx)
+ok: [IlliaShyn-2] => (item=nginx)
 ok: [IlliaShyn-3] => (item=nginx)
-ok: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
-ok: [IlliaShyn-2] => (item=prometheus-nginx-exporter)
 ok: [IlliaShyn-1] => (item=prometheus-nginx-exporter)
+ok: [IlliaShyn-2] => (item=prometheus-nginx-exporter)
+ok: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
 
 PLAY [agama_client] ************************************************************
 
@@ -6407,16 +6411,16 @@ ok: [IlliaShyn-3] => (item=IlliaShyn-2)
 PLAY [haproxy] *****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [haproxy : Install haproxy and prom-exporter] *****************************
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [haproxy : Haproxy configuration] *****************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [haproxy : Exporter haproxy template] *************************************
 ok: [IlliaShyn-1]
@@ -6431,10 +6435,10 @@ ok: [IlliaShyn-2] => (item=prometheus-haproxy-exporter)
 TASK [haproxy : Set CNAME record for haproxy] **********************************
 ok: [IlliaShyn-1] => (item=IlliaShyn-3)
 ok: [IlliaShyn-2] => (item=IlliaShyn-3)
-ok: [IlliaShyn-1] => (item=IlliaShyn-1)
 ok: [IlliaShyn-2] => (item=IlliaShyn-1)
-ok: [IlliaShyn-1] => (item=IlliaShyn-2)
+ok: [IlliaShyn-1] => (item=IlliaShyn-1)
 ok: [IlliaShyn-2] => (item=IlliaShyn-2)
+ok: [IlliaShyn-1] => (item=IlliaShyn-2)
 
 PLAY [keepalived] **************************************************************
 
@@ -6443,16 +6447,16 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [keepalived : Install keepalived] *****************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [keepalived : Put keepalived template] ************************************
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [keepalived : Put script for keepalived] **********************************
 ok: [IlliaShyn-1]
@@ -6463,18 +6467,18 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [keepalived : Install keepalived-exporter] ********************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [keepalived : Copy config file] *******************************************
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [keepalived : Start keepalived and keepalived-exporter] *******************
-ok: [IlliaShyn-1] => (item=keepalived)
 ok: [IlliaShyn-2] => (item=keepalived)
-ok: [IlliaShyn-1] => (item=keepalived-exporter)
+ok: [IlliaShyn-1] => (item=keepalived)
 ok: [IlliaShyn-2] => (item=keepalived-exporter)
+ok: [IlliaShyn-1] => (item=keepalived-exporter)
 
 PLAY RECAP *********************************************************************
 IlliaShyn-1                : ok=66   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
@@ -6489,12 +6493,12 @@ IlliaShyn-2 | CHANGED => {
 }
 IlliaShyn-3 | CHANGED => {
     "changed": true,
-    "elapsed": 41,
+    "elapsed": 42,
     "rebooted": true
 }
 IlliaShyn-1 | CHANGED => {
     "changed": true,
-    "elapsed": 42,
+    "elapsed": 43,
     "rebooted": true
 }
 + sleep 15
@@ -6523,29 +6527,29 @@ ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [init : Install prometheus exporter] **************************************
-ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [init : Install CA certificates] ******************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [init : Syslog-telegraph template] ****************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 
 TASK [init : Backup user] ******************************************************
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-1]
 
 TASK [init : Backup template] **************************************************
 ok: [IlliaShyn-1]
@@ -6553,51 +6557,51 @@ ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 
 TASK [init : Create restore directory] *****************************************
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 
 TASK [init : install Duplicity] ************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 
 PLAY [DNS] *********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [bind : Intsall bind9] ****************************************************
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-1]
 
 TASK [bind : Install dnspython library] ****************************************
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [bind : Download prometheus-bind-exporter binary] *************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [bind : Copy exp file] ****************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [bind : Create systemd service for prometheus-bind-exporter] **************
+ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-1]
 
 TASK [bind : Configure conf.options] *******************************************
+ok: [IlliaShyn-1] => (item=None)
 ok: [IlliaShyn-3] => (item=None)
 ok: [IlliaShyn-2] => (item=None)
-ok: [IlliaShyn-1] => (item=None)
 ok: [IlliaShyn-3] => (item=None)
 ok: [IlliaShyn-3]
 ok: [IlliaShyn-1] => (item=None)
@@ -6623,11 +6627,11 @@ TASK [bind : meta] *************************************************************
 
 TASK [bind : Make sure bind9 is running] ***************************************
 ok: [IlliaShyn-3] => (item=bind9)
-ok: [IlliaShyn-2] => (item=bind9)
 ok: [IlliaShyn-1] => (item=bind9)
+ok: [IlliaShyn-2] => (item=bind9)
 ok: [IlliaShyn-3] => (item=prometheus-bind-exporter)
-ok: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 ok: [IlliaShyn-1] => (item=prometheus-bind-exporter)
+ok: [IlliaShyn-2] => (item=prometheus-bind-exporter)
 
 TASK [bind : Set A record for backup server] ***********************************
 skipping: [IlliaShyn-1]
@@ -6651,30 +6655,30 @@ PLAY [Resolv] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-3]
 
 TASK [resolv : Systemd-resolved is shutdown] ***********************************
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 
 TASK [resolv : Resolv conf] ****************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 
 PLAY [docker] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 
 TASK [docker : install docker] *************************************************
-ok: [IlliaShyn-3]
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
 
 TASK [docker : Started docker service] *****************************************
 ok: [IlliaShyn-1]
@@ -6709,32 +6713,32 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : install mysql] ***************************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [mysql : mysql service is started] ****************************************
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : mysql override.cnf] **********************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : create database] *************************************************
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : Create directory] ************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : MySQL user] ******************************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : Install Mysql exporter] ******************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [mysql : MySQL exporter user] *********************************************
 ok: [IlliaShyn-1]
@@ -6757,12 +6761,12 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : Mysql backup user] ***********************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : Create replication user] *****************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [mysql : community.mysql.mysql_variables] *********************************
 ok: [IlliaShyn-1]
@@ -6773,8 +6777,8 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [mysql : Set CNAME record for mysql] **************************************
-ok: [IlliaShyn-2] => (item=IlliaShyn-3)
 ok: [IlliaShyn-1] => (item=IlliaShyn-3)
+ok: [IlliaShyn-2] => (item=IlliaShyn-3)
 ok: [IlliaShyn-1] => (item=IlliaShyn-1)
 ok: [IlliaShyn-2] => (item=IlliaShyn-1)
 ok: [IlliaShyn-1] => (item=IlliaShyn-2)
@@ -6784,8 +6788,8 @@ PLAY [agama] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IlliaShyn-1]
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [agama : Create /opt/agama directory] *************************************
 ok: [IlliaShyn-1]
@@ -6793,28 +6797,28 @@ ok: [IlliaShyn-2]
 ok: [IlliaShyn-3]
 
 TASK [agama : Install AGAMA files] *********************************************
-ok: [IlliaShyn-3] => (item=agama.py)
 ok: [IlliaShyn-1] => (item=agama.py)
+ok: [IlliaShyn-3] => (item=agama.py)
 ok: [IlliaShyn-2] => (item=agama.py)
-ok: [IlliaShyn-3] => (item=Dockerfile)
 ok: [IlliaShyn-1] => (item=Dockerfile)
+ok: [IlliaShyn-3] => (item=Dockerfile)
 ok: [IlliaShyn-2] => (item=Dockerfile)
 
 TASK [agama : Agama image] *****************************************************
+ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-3]
-ok: [IlliaShyn-2]
 
 TASK [agama : Agama container] *************************************************
 ok: [IlliaShyn-1] => (item=None)
+ok: [IlliaShyn-3] => (item=None)
 ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-3] => (item=None)
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-1] => (item=None)
 ok: [IlliaShyn-1]
 ok: [IlliaShyn-2] => (item=None)
 ok: [IlliaShyn-2]
-ok: [IlliaShyn-3] => (item=None)
-ok: [IlliaShyn-3]
 
 PLAY [influxdb] ****************************************************************
 
@@ -6902,13 +6906,13 @@ ok: [IlliaShyn-3]
 PLAY [Nginx] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-2]
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
+ok: [IlliaShyn-2]
 
 TASK [nginx : Install Nginx] ***************************************************
-ok: [IlliaShyn-3]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-3]
 ok: [IlliaShyn-2]
 
 TASK [nginx : Copy conf for nginx] *********************************************
@@ -6918,11 +6922,11 @@ ok: [IlliaShyn-2]
 
 TASK [nginx : Started Nginx and Prometheus nginx exporters] ********************
 ok: [IlliaShyn-1] => (item=nginx)
-ok: [IlliaShyn-3] => (item=nginx)
 ok: [IlliaShyn-2] => (item=nginx)
-ok: [IlliaShyn-1] => (item=prometheus-nginx-exporter)
-ok: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
+ok: [IlliaShyn-3] => (item=nginx)
 ok: [IlliaShyn-2] => (item=prometheus-nginx-exporter)
+ok: [IlliaShyn-3] => (item=prometheus-nginx-exporter)
+ok: [IlliaShyn-1] => (item=prometheus-nginx-exporter)
 
 PLAY [agama_client] ************************************************************
 
@@ -6961,32 +6965,32 @@ ok: [IlliaShyn-3] => (item=IlliaShyn-2)
 PLAY [haproxy] *****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
+ok: [IlliaShyn-1]
 
 TASK [haproxy : Install haproxy and prom-exporter] *****************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [haproxy : Haproxy configuration] *****************************************
 ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
 
 TASK [haproxy : Exporter haproxy template] *************************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [haproxy : Start haproxy and prom-exporter] *******************************
-ok: [IlliaShyn-2] => (item=haproxy)
 ok: [IlliaShyn-1] => (item=haproxy)
-ok: [IlliaShyn-2] => (item=prometheus-haproxy-exporter)
+ok: [IlliaShyn-2] => (item=haproxy)
 ok: [IlliaShyn-1] => (item=prometheus-haproxy-exporter)
+ok: [IlliaShyn-2] => (item=prometheus-haproxy-exporter)
 
 TASK [haproxy : Set CNAME record for haproxy] **********************************
 ok: [IlliaShyn-1] => (item=IlliaShyn-3)
 ok: [IlliaShyn-2] => (item=IlliaShyn-3)
-ok: [IlliaShyn-2] => (item=IlliaShyn-1)
 ok: [IlliaShyn-1] => (item=IlliaShyn-1)
+ok: [IlliaShyn-2] => (item=IlliaShyn-1)
 ok: [IlliaShyn-1] => (item=IlliaShyn-2)
 ok: [IlliaShyn-2] => (item=IlliaShyn-2)
 
@@ -7009,16 +7013,16 @@ ok: [IlliaShyn-1]
 ok: [IlliaShyn-2]
 
 TASK [keepalived : Put script for keepalived] **********************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [keepalived : Download keepalived-exporter binary] ************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [keepalived : Install keepalived-exporter] ********************************
-ok: [IlliaShyn-2]
 ok: [IlliaShyn-1]
+ok: [IlliaShyn-2]
 
 TASK [keepalived : Copy config file] *******************************************
 ok: [IlliaShyn-1]
@@ -7036,4 +7040,4 @@ IlliaShyn-2                : ok=66   changed=0    unreachable=0    failed=0    s
 IlliaShyn-3                : ok=76   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Fri Jan  3 00:12:00 EET 2025
+Fri Jan  3 13:25:54 EET 2025
