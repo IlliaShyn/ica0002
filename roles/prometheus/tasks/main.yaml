@@ -17,7 +17,7 @@
     mode: '0644'
   notify: Restart prometheus 
 
-- name: Started Nginx and Prometheus nginx exporters
+- name: Started Prometheus
   service:
     enabled: yes
     name: "{{ item }}"

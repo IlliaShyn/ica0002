@@ -28,11 +28,11 @@ defaults
 
 listen agama
         bind *:88
-{% for vm in groups['agamas'] %}
-{% for container in range(app_containers_per_vm) %}
-        server {{vm | replace('IlliaShyn-', 'agama')}}-{{ container + 1 }} IlliaShyn-{{ vm.split('-')[1]}}.{{ startup_name }}:800{{ container + 1 }} check
+{% for num in range(app_containers_per_vm) %}
+      server agama1{{ num + 1 }} lb-1:800{{ num + 1 }} check
+      server agama2{{ num + 1 }} lb-2:800{{ num + 1 }} check
 {% endfor %}
-{% endfor %}
+
 
 listen stats
     bind *:9188
