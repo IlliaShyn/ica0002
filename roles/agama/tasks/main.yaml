@@ -29,14 +29,15 @@
   loop: "{{ range(app_containers_per_vm) }}"
   no_log: true
 
-- name: Agama's cname record
+- name: Set CNAME record for agama
   community.general.nsupdate:
     key_name: "nsupdate.key"
     key_algorithm: "hmac-sha256"
     key_secret: "{{ dns_update_key }}"
-    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
     zone: "{{ startup_name }}"
     record: "www{{ item | replace('IlliaShyn', '') }}"
+    value: "{{ item }}"
     type: "CNAME"
-    value: "{{ inventory_hostname }}"
+  with_items: "{{ groups['dns_servers'] }}"
 
