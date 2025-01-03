@@ -86,6 +86,7 @@
   template:
     src: influxdb_backup.conf.j2
     dest: /etc/cron.d/influx-backup
+  notify: Cron restart
 
 - name: Influx CNAME record
   community.general.nsupdate:

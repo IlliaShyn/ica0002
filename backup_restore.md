@@ -14,22 +14,22 @@ Connection via ssh:
    
     ssh ubuntu@<public ip address> -p <port>  or  ssh -p <port> ubuntu@193.40.156.67 
 
-
-3.Downloading of files from backup server:
-   
-    sudo -u backup duplicity --no-encryption restore rsync://IlliaShyn@backup.agamais.ttu/mysql /home/backup/restore/mysql
-
-
-4.Switch to the root user:
+3.Switch to the root user:
 
 
     sudo su - 
 
 
+4.Downloading of files from backup server:
+   
+    sudo -u backup duplicity --no-encryption restore rsync://IlliaShyn@backup.agamais.ttu/mysql /home/backup/restore/mysql
+
+
+
 5.Restore data from the backup:
 
 
-    mysql agama < /home/backup/mysql/agama.sql
+    mysql agama < /home/backup/restore/mysql/agama.sql
 
 
 
