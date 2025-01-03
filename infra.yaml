@@ -9,6 +9,8 @@
     become: yes
     roles: 
       - bind
+    tags: 
+      - bind
 
   - name: Resolv
     hosts: all
@@ -21,6 +23,8 @@
     hosts: docker
     roles:
       - docker
+    tags: 
+      - dock
 
   - name: Prometheus
     hosts: prometheus
@@ -47,11 +51,15 @@
     hosts: influxdb
     roles:
       - influxdb
+    tags: 
+      - in
 
   - name: grafana
     hosts: grafana
     roles:
       - grafana
+    tags: 
+      - graf
 
   - name: Nginx
     hosts: web_servers
@@ -64,6 +72,8 @@
     hosts: influxdb
     roles: 
       - agama_client
+    tags: 
+      - acli
 
   - name: haproxy
     hosts: haproxy
