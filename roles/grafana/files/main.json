@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -156,8 +156,8 @@
             "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "influxdb_write_write_ok",
+          "editorMode": "code",
+          "expr": "rate(influxdb_write_write_ok{job=\"influx\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -317,7 +317,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -325,16 +325,28 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 80,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
             "lineWidth": 1,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -365,25 +377,16 @@
       },
       "id": 6,
       "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
-        "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
+        }
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -393,8 +396,8 @@
             "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "mysql_global_status_commands_total{job=\"mysql\"}",
+          "editorMode": "code",
+          "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -404,7 +407,7 @@
         }
       ],
       "title": "MySQL commands global",
-      "type": "barchart"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -773,7 +776,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -800,28 +836,16 @@
       },
       "id": 8,
       "options": {
-        "displayMode": "gradient",
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -831,8 +855,8 @@
             "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "nginx_http_requests_total{job=\"nginx\"}",
+          "editorMode": "code",
+          "expr": "rate(nginx_http_requests_total{job=\"nginx\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -842,7 +866,7 @@
         }
       ],
       "title": "Nginx requests",
-      "type": "bargauge"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1223,6 +1247,6 @@
   "timezone": "browser",
   "title": "Main",
   "uid": "ee1vjjb0v2gowf",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

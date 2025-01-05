@@ -60,7 +60,7 @@
     password: "{{ exporter_password }}"
     priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  notify: prometheus-mysqld-exporter
+  notify: Restart Exporter
   no_log: true
 
 - name: my.conf template
@@ -129,10 +129,10 @@
     key_secret: "{{ dns_update_key }}"
     server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
     zone: "{{ startup_name }}"
-    record: "mysql{{ item | replace('IlliaShyn', '') }}"
+    record: "db-{{ item | replace('IlliaShyn-', '') }}"
     value: "{{ item }}"
     type: "CNAME"
-  with_items: "{{ groups['dns_primary'] }}"
+  with_items: "{{ groups['dns_servers'] }}"
 
 
 

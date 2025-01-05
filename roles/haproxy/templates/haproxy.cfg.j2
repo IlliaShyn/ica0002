@@ -28,15 +28,14 @@ defaults
 
 listen agama
         bind *:88
-{% for num in range(app_containers_per_vm) %}
-      server agama1{{ num + 1 }} lb-1:800{{ num + 1 }} check
-      server agama2{{ num + 1 }} lb-2:800{{ num + 1 }} check
+{% for i in range(app_containers_per_vm) %}
+      server agama1-{{ i + 1 }} www-1:800{{ i + 1 }} check
+      server agama2-{{ i + 1 }} www-2:800{{ i + 1 }} check
 {% endfor %}
 
 
 listen stats
     bind *:9188
-    http-request use-service prometheus-exporter if { path /metrics }
     stats enable
-    stats uri /stats
+    stats uri /haproxy?stats
     stats refresh 10s
