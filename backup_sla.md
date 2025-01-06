@@ -11,13 +11,6 @@ Services that are backed up:
 - MySQL
 - InfluxDB
 - group_vars all.yaml
-
-
-# [ Schedule ]
-
-    Full backups are performed weekly. Incremental backups performed every day.
-    Full backup - performed every Sunday at 12.04 - kept for 40 days. Store 4 versions.
-    Incremental backup - (Monday -> Saturday) 12.04 - kept for 40 days. Store 30 versions. RPO - 24 hours. All backups are started automatically by cron.
  
 
 # [ Storage ]
@@ -28,12 +21,19 @@ Services that are backed up:
 
     Backup data from both servers will be synchronized to encrypted AWS S3 bucket in future (work in progress).
 
+# [ Schedule ]
 
+    Full MySQL/Influx backup - performed every Sunday at 12.04 
+    Incremental MySQL/Influx backup - (Monday -> Saturday) 12.04
+    15-25 minutes - tume required to create and store the backup
+    All backups are started automatically by cron.
+    RPO is set to 24 hours.
 
 # [ Retention ]
 
-    Full backup - performed every Sunday at 12.04 - kept for 40 days. Store 4 versions.
-    Incremental backup - (Monday -> Saturday) 12.04 - kept for 40 days. Store 30 versions. 
+    Full backup - kept for 40 days. Store 5 versions.
+    Incremental backup - kept for 40 days. Store 40 versions.
+    All the other important data including tasks/structure/configurations has the backup in both internal and remote git repository.
 
 
 # [ Usability checks ]
@@ -42,4 +42,7 @@ Services that are backed up:
 
 # [ Restore process ]
 
-    RTO (recovery time objective) is 3 hours
+    RTO (recovery time objective):
+    30 minutes for git repository
+    2 hours for MySQL database
+    2 hours for InfluxDB database

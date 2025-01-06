@@ -63,6 +63,12 @@
     group: backup
     mode: 0755
 
+- name: Make sure node-exporter is running
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: true
+
 - name: install Duplicity
   ansible.builtin.apt:
     name: duplicity
