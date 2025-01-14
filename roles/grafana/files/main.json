@@ -217,18 +217,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 5,
         "w": 11,
         "x": 13,
         "y": 0
       },
       "id": 1,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -236,9 +234,9 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -259,7 +257,7 @@
         }
       ],
       "title": "CPU on VM's",
-      "type": "stat"
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -327,106 +325,6 @@
       ],
       "title": "Count agama",
       "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 11,
-        "x": 13,
-        "y": 3
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[1m])",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "MySQL commands global",
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -573,6 +471,106 @@
       ],
       "title": "haproxy_server_up",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 11,
+        "x": 13,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[1m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "MySQL queries",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -848,10 +846,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 11,
         "x": 13,
-        "y": 7
+        "y": 9
       },
       "id": 8,
       "options": {
@@ -875,9 +873,11 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
+          "exemplar": false,
           "expr": "rate(nginx_http_requests_total{job=\"nginx\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
+          "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
@@ -1113,7 +1113,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1140,21 +1173,16 @@
       },
       "id": 3,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -1165,7 +1193,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "bind_resolver_queries_total",
+          "expr": "rate(bind_resolver_queries_total{job=\"bind9\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1176,7 +1204,7 @@
         }
       ],
       "title": "bind_resolver_queries_total",
-      "type": "stat"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1266,6 +1294,6 @@
   "timezone": "browser",
   "title": "Main",
   "uid": "ee1vjjb0v2gowf",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
