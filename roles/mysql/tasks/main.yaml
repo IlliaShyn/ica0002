@@ -6,7 +6,6 @@
     owner: backup
     group: backup
   no_log: true
-  notify: Restart MySQL
 
 - name: install mysql
   ansible.builtin.apt:

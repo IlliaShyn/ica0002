@@ -5,7 +5,7 @@ datasources:
     access: proxy
     orgId: 1
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
-    url: http://{{groups['prometheus'][0]}}/prometheus
+    url: http://prometheus:9090/prometheus
     editable: false
 
   - name: InfluxDB:latency
