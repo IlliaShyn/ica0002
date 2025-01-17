@@ -1,0 +1,4 @@
+00 12 * * * backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
+04 12 * * 0 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
+04 12 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://IlliaShyn@backup.agamais.ttu/influxdb
+04 12 1 * * backup  duplicity remove-older-than 40D rsync://IlliaShyn@backup.agamais.ttu/influxdb

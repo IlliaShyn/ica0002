@@ -1,0 +1,43 @@
+- name: Create /opt/agama directory
+  ansible.builtin.file:
+    path: /opt/agama
+    state: directory
+
+- name: Install AGAMA files
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/hudolejev/agama/master/{{ item }}"
+    dest: /opt/agama/{{ item }}
+  loop:
+    - agama.py
+    - Dockerfile
+
+- name: Agama image
+  community.docker.docker_image:
+    name: agama
+    source: build
+    build:
+      path: /opt/agama
+
+- name: Agama container
+  community.docker.docker_container:
+    name: "agama_{{ item + 1 }}"
+    image: agama
+    published_ports: "{{ agama_port + item }}:8000"
+    env:
+      AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+    restart_policy: always
+  loop: "{{ range(app_containers_per_vm) }}"
+  no_log: true
+
+- name: Set CNAME record for agama
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
+    zone: "{{ startup_name }}"
+    record: "www{{ item | replace('IlliaShyn', '') }}"
+    value: "{{ item }}"
+    type: "CNAME"
+  with_items: "{{ groups['dns_servers'] }}"
+

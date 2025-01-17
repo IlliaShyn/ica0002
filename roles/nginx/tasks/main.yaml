@@ -1,0 +1,25 @@
+- name: Install Nginx
+  ansible.builtin.apt: 
+    name: 
+      - nginx
+      - prometheus-nginx-exporter
+    state: present
+
+- name: Copy conf for nginx
+  ansible.builtin.template:
+    dest: /etc/nginx/sites-enabled/default
+    src: default.j2
+    mode: '0644'
+  notify: 
+    - Restart nginx
+    - sleep 10
+    - Restart nginx exporter
+
+- name: Started Nginx and Prometheus nginx exporters
+  service:
+    enabled: yes
+    name: "{{ item }}"
+    state: started
+  loop:
+    - nginx
+    - prometheus-nginx-exporter

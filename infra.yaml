@@ -1,0 +1,91 @@
+---
+  - name: Initial setup
+    hosts: all
+    roles:
+      - init
+  
+  - name: DNS
+    hosts: dns_servers
+    become: yes
+    roles: 
+      - bind
+    tags: 
+      - bind
+
+  - name: Resolv
+    hosts: all
+    roles: 
+      - resolv
+    tags: 
+      - res
+
+  - name: docker
+    hosts: docker
+    roles:
+      - docker
+    tags: 
+      - dock
+
+  - name: Prometheus
+    hosts: prometheus
+    roles:
+      - prometheus
+    tags: 
+      - prom
+  
+  - name: Database
+    hosts: db_servers
+    roles: 
+      - mysql
+    tags:
+      - db
+
+  - name: agama
+    hosts: agamas
+    roles: 
+      - agama
+    tags:
+      - ag
+  
+  - name: influxdb
+    hosts: influxdb
+    roles:
+      - influxdb
+    tags: 
+      - in
+
+  - name: grafana
+    hosts: grafana
+    roles:
+      - grafana
+    tags: 
+      - graf
+
+  - name: Nginx
+    hosts: web_servers
+    roles: 
+      - nginx
+    tags: 
+      - web
+  
+  - name: agama_client
+    hosts: influxdb
+    roles: 
+      - agama_client
+    tags: 
+      - acli
+
+  - name: haproxy
+    hosts: haproxy
+    roles: 
+      - haproxy
+    tags: 
+      - hap
+
+  - name: keepalived
+    hosts: keepalived
+    roles: 
+      - keepalived
+    tags: 
+      - k
+

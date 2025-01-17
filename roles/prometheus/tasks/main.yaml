@@ -1,0 +1,38 @@
+- name: Install prometheus
+  ansible.builtin.apt: 
+    name: prometheus
+    state: present
+
+- name: Conf for prometheus
+  ansible.builtin.template: 
+    src: prometheus.yml 
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644'
+  notify: Restart prometheus
+
+- name: Web template
+  ansible.builtin.template: 
+    src: metrics.j2 
+    dest: /etc/default/prometheus
+    mode: '0644'
+  notify: Restart prometheus 
+
+- name: Started Prometheus
+  service:
+    enabled: yes
+    name: "{{ item }}"
+    state: started
+  loop:
+    - prometheus
+
+- name: Prometheus "CNAME" record
+  community.general.nsupdate:
+    key_name: "nsupdate.key" 
+    key_secret: "{{ dns_update_key }}" 
+    zone: "{{ startup_name }}"
+    record: "prometheus"
+    value: "{{ inventory_hostname }}"
+    type: "CNAME"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+  no_log: true
